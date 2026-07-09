@@ -1,0 +1,208 @@
+---
+/**
+ * AdSlot.astro — AdSense-ready placeholder container.
+ *
+ * RF-004: Ads must load DEFERRED 2 seconds after page load so they never
+ * block render. This component renders a styled placeholder (ad-container)
+ * immediately, and 2s after DOMContentLoaded attempts to load AdSense only
+ * if `window.__ADSENSE_CLIENT` is configured. With no real AdSense creds the
+ * placeholder simply remains — no real ad code is injected.
+ *
+ * Usage:
+ *   <AdSlot size="leaderboard" />
+ *   <AdSlot size="rectangle" />
+ *   <AdSlot size="mobile-sticky" class="ad-fixed-bottom" />
+ *   <AdSlot size="smart" />
+ */
+interface Props {
+  /** Slot size variant. Controls dimensions and label. */
+  size?: 'leaderboard' | 'rectangle' | 'mobile-sticky' | 'smart';
+  /** Optional extra classes (e.g. "lg:hidden" to hide on desktop). */
+  class?: string;
+  /** Optional explicit AdSense data-ad-slot id (stored for future use). */
+  slot?: string;
+}
+
+const { size = 'rectangle', class: className = '', slot } = Astro.props;
+
+// Dimensions + human label per variant (kept in sync with global design system).
+const SIZES = {
+  leaderboard: { w: 728, h: 90, label: 'Publicidad · 728×90', cls: 'ad-leaderboard' },
+  rectangle: { w: 336, h: 280, label: 'Publicidad · 336×280', cls: 'ad-rectangle' },
+  'mobile-sticky': { w: 320, h: 50, label: 'Publicidad · 320×50', cls: 'ad-mobile-sticky' },
+  smart: { w: 0, h: 100, label: 'Publicidad · anuncio inteligente', cls: 'ad-smart' },
+} as const;
+
+const conf = SIZES[size];
+const uid = `ad-${size}-${Math.random().toString(36).slice(2, 9)}`;
+const hasFixed = size === 'mobile-sticky' && className.includes('ad-fixed-bottom');
+---
+
+<div
+  class={`ad-container ${conf.cls} ${hasFixed ? 'ad-fixed-bottom' : ''} ${className}`}
+  data-ad-slot={slot}
+  data-ad-size={size}
+  data-ad-w={conf.w || undefined}
+  data-ad-h={conf.h || undefined}
+  id={uid}
+  role="complementary"
+  aria-label={conf.label}
+>
+  <span class="ad-label">{conf.label}</span>
+  <span class="ad-hint" data-ad-hint>espacio publicitario</span>
+</div>
+
+<script>
+  // RF-004 — deferred load: wait 2s after DOMContentLoaded, then attempt AdSense.
+  function loadAdSenseWhenReady() {
+    var containers = document.querySelectorAll('.ad-container');
+    if (containers.length === 0) return;
+
+    // Only attempt real load if a publisher client id was injected elsewhere
+    // (e.g. window.__ADSENSE_CLIENT = "ca-pub-..." set in <head>).
+    var client = window.__ADSENSE_CLIENT;
+    if (!client) {
+      // No creds yet — keep placeholder, nothing to do.
+      return;
+    }
+
+    // Guard: load the AdSense library at most once.
+    if (!window.adsbygoogle) {
+      var s = document.createElement('script');
+      s.async = true;
+      s.crossOrigin = 'anonymous';
+      s.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=' + encodeURIComponent(client);
+      document.head.appendChild(s);
+    }
+
+    containers.forEach(function (el) {
+      if (el.dataset.adLoaded === 'true') return;
+      var ins = document.createElement('ins');
+      ins.className = 'adsbygoogle';
+      ins.style.display = 'block';
+      ins.dataset.adClient = client;
+      var slotId = el.getAttribute('data-ad-slot');
+      if (slotId) ins.dataset.adSlot = slotId;
+
+      var size = el.getAttribute('data-ad-size');
+      if (size === 'smart') {
+        ins.dataset.adFormat = 'auto';
+        ins.dataset.fullWidthResponsive = 'true';
+      } else if (slotId && el.dataset.adW && el.dataset.adH) {
+        ins.dataset.adSlot = slotId + '|' + el.dataset.adW + ',' + el.dataset.adH;
+      }
+
+      el.innerHTML = '';
+      el.appendChild(ins);
+      try {
+        window.adsbygoogle = window.adsbygoogle || [];
+        window.adsbygoogle.push({});
+        el.dataset.adLoaded = 'true';
+      } catch (e) {
+        /* keep placeholder on failure */
+      }
+    });
+  }
+
+  // Defer 2s after DOM ready per RF-004 (non-blocking).
+  function scheduleDeferred() {
+    var delay = 2000;
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', function () { setTimeout(loadAdSenseWhenReady, delay); });
+    } else {
+      setTimeout(loadAdSenseWhenReady, delay);
+    }
+  }
+
+  scheduleDeferred();
+</script>
+
+<style>
+  .ad-container {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    margin: 24px auto;
+    padding: 12px;
+    border: 1px dashed var(--color-accent-400, #818cf8);
+    border-radius: 12px;
+    background:
+      linear-gradient(135deg, rgba(99, 102, 241, 0.10), rgba(168, 85, 247, 0.10)),
+      var(--color-surface-2, #18181b);
+    color: var(--color-accent-200, #c7d2fe);
+    text-align: center;
+    box-sizing: border-box;
+    overflow: hidden;
+  }
+
+  .ad-label {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    opacity: 0.85;
+  }
+
+  .ad-hint {
+    font-size: 11px;
+    opacity: 0.55;
+  }
+
+  .ad-leaderboard {
+    width: 728px;
+    max-width: 100%;
+    min-height: 90px;
+    /* Desktop-only: leaderboard hidden on small screens (RF-004). */
+    display: none;
+  }
+
+  @media (min-width: 1024px) {
+    .ad-leaderboard {
+      display: flex;
+    }
+  }
+
+  .ad-rectangle {
+    width: 336px;
+    max-width: 100%;
+    min-height: 280px;
+  }
+
+  .ad-mobile-sticky {
+    width: 320px;
+    max-width: 100%;
+    min-height: 50px;
+  }
+
+  .ad-smart {
+    width: 100%;
+    min-height: 100px;
+  }
+
+  /* Mobile sticky bottom banner: fixed to bottom, hidden on lg+.
+     Hidden via component media query (scoped) so it always wins over utility
+     classes without specificity conflicts. */
+  .ad-mobile-sticky.ad-fixed-bottom {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 50;
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+    border-radius: 0;
+    border-left: none;
+    border-right: none;
+    border-bottom: none;
+  }
+
+  @media (min-width: 1024px) {
+    .ad-mobile-sticky.ad-fixed-bottom {
+      display: none;
+    }
+  }
+</style>

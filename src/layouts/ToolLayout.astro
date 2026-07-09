@@ -10,31 +10,64 @@ const { h1, texto_seo, slug, locale, activeCategory } = Astro.props;
 import { getCollection } from 'astro:content';
 import Layout from './Layout.astro';
 import Sidebar from '../components/Sidebar.astro';
+import AdSlot from '../components/AdSlot.astro';
 
-const tools = (await getCollection('tools')).map(t => ({ slug: t.data.slug, h1: t.data.h1, component: t.data.component }));
-const current = tools.find(t => t.slug === slug);
+const collection = locale === 'en' ? 'toolsEn' : 'tools';
+const FIELD = locale === 'en' ? 'category' : 'categoria';
+const all = await getCollection(collection as 'tools');
+const current = all.find((t) => t.data.slug === slug);
+const resolvedActive = activeCategory ?? (current ? (current.data as any)[FIELD] : undefined);
 ---
-<Layout titulo_seo={current?.h1} meta_descripcion={texto_seo.slice(0,160)} locale={locale}>
-  <div class="tool-layout">
-    <Sidebar locale={locale} activeCategory={activeCategory} />
-    <div class="tool-content">
-      <h1>{h1}</h1>
-      <article class="seo-text">
-        <Fragment set:html={texto_seo} />
-      </article>
-      <section class="tool-island" data-component={current?.component} data-slug={slug}>
-        <slot name="tool" />
-      </section>
-    </div>
+
+<Layout titulo_seo={current?.data.h1} meta_descripcion={texto_seo.slice(0,160)} locale={locale}>
+  <div class="flex min-h-screen">
+    <!-- Left: category sidebar -->
+    <Sidebar locale={locale} activeCategory={resolvedActive} currentSlug={slug} />
+
+    <!-- Content area: center column + right sticky tool-island -->
+    <main class="flex-1 min-w-0">
+      <div class="max-w-[1440px] mx-auto flex flex-col lg:flex-row">
+        <!-- Center column: H1 + SEO text -->
+        <div class="flex-1 min-w-0 px-4 lg:px-8 py-6 lg:py-8">
+          <AdSlot size="leaderboard" />
+
+          <h1 class="text-2xl lg:text-[32px] font-bold text-white tracking-tight leading-tight mb-3">
+            {h1}
+          </h1>
+          <p class="text-zinc-400 text-sm lg:text-base leading-relaxed max-w-xl mb-6">
+            {locale === 'en'
+              ? 'Free, private and 100% client-side. No data leaves your browser.'
+              : 'Gratuita, privada y 100% en tu navegador. Ningún dato sale de tu dispositivo.'}
+          </p>
+
+          <article class="seo-text max-w-2xl text-zinc-400 text-sm leading-[1.7]">
+            <Fragment set:html={texto_seo} />
+          </article>
+
+          <AdSlot size="rectangle" />
+
+          <slot name="faq" />
+        </div>
+
+        <!-- Right column: sticky tool-island (desktop only) -->
+        <div class="hidden lg:block w-[420px] xl:w-[460px] shrink-0 px-6 py-8">
+          <div class="tool-island sticky top-[88px]">
+            <div class="bg-surface-3 border border-zinc-700/40 rounded-xl p-6 shadow-2xl shadow-black/30">
+              <slot name="tool" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
   </div>
+
+  <AdSlot size="mobile-sticky" class="ad-fixed-bottom lg:hidden" />
 </Layout>
 
 <style>
-  .tool-layout { display: flex; gap: 32px; align-items: flex-start; }
-  .tool-content { flex: 1; min-width: 0; }
-  .seo-text { max-width: 720px; color: #cbd5e1; line-height: 1.7; font-size: 16px; }
-  .tool-island { margin: 30px 0; }
-  @media (max-width: 720px) {
-    .tool-layout { flex-direction: column; gap: 20px; }
-  }
+  .seo-text :global(h2) { font-size: 1.25rem; font-weight: 600; color: #fff; margin: 1.5rem 0 0.75rem; }
+  .seo-text :global(p) { margin-bottom: 1rem; }
+  .seo-text :global(a) { color: var(--color-accent-400); text-decoration: underline; }
+  .seo-text :global(ul) { list-style: disc; padding-left: 1.25rem; margin-bottom: 1rem; }
+  .seo-text :global(code) { background: var(--color-surface-2); padding: 0.125rem 0.375rem; border-radius: 0.25rem; color: var(--color-accent-300); font-size: 0.8125rem; }
 </style>

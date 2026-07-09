@@ -1,0 +1,107 @@
+---
+interface Props {
+  /** Optional eyebrow label, defaults to the ui.html "Herramienta Activa" pill. */
+  label?: string;
+  /** Optional title shown under the active-tool pill. */
+  title?: string;
+  /** Optional subtitle shown under the title. */
+  subtitle?: string;
+}
+const {
+  label = 'Herramienta Activa',
+  title,
+  subtitle,
+} = Astro.props;
+---
+
+<div class="tool-island-card bg-surface-3 border border-zinc-700/40 rounded-xl p-6 shadow-2xl shadow-black/30">
+  <div class="flex items-center gap-2 mb-5">
+    <div class="w-2 h-2 rounded-full bg-accent-500 animate-pulse"></div>
+    <span class="text-[10px] font-semibold text-accent-400 uppercase tracking-widest">{label}</span>
+  </div>
+
+  {title && <h3 class="text-lg font-bold text-white mb-1">{title}</h3>}
+  {subtitle && <p class="text-xs text-zinc-500 mb-5">{subtitle}</p>}
+  {!title && subtitle && <p class="text-xs text-zinc-500 mb-5">{subtitle}</p>}
+
+  <slot />
+</div>
+
+<style is:global>
+  /* Tailwind polish for the tool form fields (inputs/buttons) inside the island.
+     Colors reference the @theme tokens (--color-surface-*, --color-accent-*) so
+     they stay in sync with global.css. */
+  .tool-island .tool-box {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .tool-island .tool-box label {
+    display: block;
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: #a1a1aa; /* zinc-400 */
+    margin-bottom: 0.375rem;
+  }
+
+  .tool-island .tool-box input,
+  .tool-island .tool-box textarea,
+  .tool-island .tool-box select {
+    width: 100%;
+    padding: 0.625rem 0.875rem;
+    background: var(--color-surface-2);
+    border: 1px solid color-mix(in oklab, var(--color-surface-5) 60%, transparent);
+    border-radius: 0.5rem;
+    color: #f4f4f5; /* zinc-100 */
+    font-size: 0.875rem;
+    line-height: 1.4;
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  }
+
+  .tool-island .tool-box textarea {
+    resize: vertical;
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  }
+
+  .tool-island .tool-box input::placeholder,
+  .tool-island .tool-box textarea::placeholder {
+    color: #52525b; /* zinc-600 */
+  }
+
+  .tool-island .tool-box input:focus,
+  .tool-island .tool-box textarea:focus,
+  .tool-island .tool-box select:focus {
+    outline: none;
+    border-color: color-mix(in oklab, var(--color-accent-500) 60%, transparent);
+    box-shadow: 0 0 0 2px color-mix(in oklab, var(--color-accent-500) 12%, transparent);
+  }
+
+  .tool-island .tool-box button {
+    align-self: flex-start;
+    padding: 0.625rem 1.25rem;
+    background: linear-gradient(135deg, var(--color-accent-500) 0%, var(--color-accent-700) 100%);
+    border: 1px solid transparent;
+    border-radius: 0.5rem;
+    color: #ffffff;
+    font-size: 0.875rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s ease, transform 0.15s ease, box-shadow 0.2s ease;
+  }
+
+  .tool-island .tool-box button:hover {
+    background: linear-gradient(135deg, var(--color-accent-400) 0%, var(--color-accent-500) 100%);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px color-mix(in oklab, var(--color-accent-500) 30%, transparent);
+  }
+
+  .tool-island .tool-box button:active {
+    transform: translateY(0);
+  }
+
+  .tool-island .tool-box p {
+    color: #9aa3b2;
+    font-size: 0.875rem;
+  }
+</style>

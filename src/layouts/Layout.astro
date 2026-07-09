@@ -18,9 +18,13 @@ const rest = fullPath.replace(/^\/(es|en)(?=\/|$)/, '') || '';
 const esHref = `${SITE}/es${rest}`;
 const enHref = `${SITE}/en${rest}`;
 const xDefault = `${SITE}/es${rest}`;
+
+const searchPh = locale === 'en' ? 'Search 85+ tools…' : 'Buscar entre 85+ herramientas…';
+const langLabel = { es: 'ES', en: 'EN' } as const;
 ---
+
 <!doctype html>
-<html lang={locale}>
+<html lang={locale} class="dark">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -30,20 +34,167 @@ const xDefault = `${SITE}/es${rest}`;
     <link rel="alternate" hreflang="es" href={esHref} />
     <link rel="alternate" hreflang="en" href={enHref} />
     <link rel="alternate" hreflang="x-default" href={xDefault} />
+    <script is:inline>
+      // Apply persisted theme before paint to avoid flash.
+      (function () {
+        try {
+          var saved = localStorage.getItem('theme');
+          var dark = saved ? saved === 'dark' : true;
+          var root = document.documentElement;
+          root.classList.toggle('dark', dark);
+        } catch (e) {}
+      })();
+    </script>
     <slot name="head" />
   </head>
-  <body>
-    <header class="site-header">
-      <a href={`/${locale}/`} class="brand">MultiTools</a>
-      <nav class="site-nav">
-        <a href={`/${locale}/`}>{locale === 'en' ? 'Tools' : 'Herramientas'}</a>
-      </nav>
+  <body class="bg-surface-0 text-zinc-200 font-sans antialiased min-h-screen">
+
+    <!-- ============ HEADER ============ -->
+    <header class="fixed top-0 left-0 right-0 h-16 bg-surface-1/80 backdrop-blur-xl border-b border-zinc-800/50 z-50 flex items-center px-4 lg:px-6">
+      <!-- Logo -->
+      <a href={`/${locale}/`} class="flex items-center gap-2 shrink-0">
+        <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-accent-500 to-accent-700 flex items-center justify-center">
+          <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zm10 0a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zm10 0a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"/>
+          </svg>
+        </div>
+        <span class="text-lg font-bold text-white tracking-tight hidden sm:block">MultiTools</span>
+      </a>
+
+      <!-- Search Bar (Desktop) -->
+      <div class="hidden lg:flex flex-1 max-w-md mx-8">
+        <div class="relative w-full">
+          <svg class="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-zinc-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+          </svg>
+          <input
+            type="text"
+            id="globalSearch"
+            placeholder={searchPh}
+            class="w-full pl-10 pr-4 py-2 bg-surface-3 border border-zinc-700/50 rounded-lg text-sm text-zinc-200 placeholder-zinc-500 focus:outline-none focus:border-accent-500/50 focus:ring-1 focus:ring-accent-500/20 transition-all"
+          />
+          <kbd class="absolute right-3 top-1/2 -translate-y-1/2 px-1.5 py-0.5 text-[10px] text-zinc-500 bg-surface-4 rounded border border-zinc-700">⌘K</kbd>
+        </div>
+      </div>
+
+      <!-- Right Actions -->
+      <div class="flex items-center gap-3 ml-auto">
+        <!-- Language Switcher (ES / EN) -->
+        <div class="hidden sm:flex items-center rounded-lg border border-zinc-700/50 overflow-hidden text-xs font-medium">
+          <a
+            href={esHref}
+            class={`px-3 py-1.5 transition-colors ${locale === 'es' ? 'bg-accent-600 text-white' : 'text-zinc-300 hover:bg-surface-3'}`}
+            hreflang="es"
+          >🌐 ES</a>
+          <a
+            href={enHref}
+            class={`px-3 py-1.5 transition-colors ${locale === 'en' ? 'bg-accent-600 text-white' : 'text-zinc-300 hover:bg-surface-3'}`}
+            hreflang="en"
+          >🌐 EN</a>
+        </div>
+
+        <!-- Theme Toggle -->
+        <button id="themeToggle" class="p-2 rounded-lg hover:bg-surface-3 transition-colors" title={locale === 'en' ? 'Toggle theme' : 'Cambiar tema'} aria-label="theme toggle">
+          <svg class="w-4 h-4 text-zinc-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/>
+          </svg>
+        </button>
+
+        <!-- Mobile Menu Button -->
+        <button id="mobileMenuBtn" class="lg:hidden p-2 rounded-lg hover:bg-surface-3 transition-colors" aria-label="menu">
+          <svg class="w-5 h-5 text-zinc-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+          </svg>
+        </button>
+      </div>
     </header>
-    <main class="site-main">
+
+    <!-- ============ MOBILE DRAWER ============ -->
+    <div id="mobileDrawer" class="fixed inset-0 z-[60] bg-black/60 backdrop-blur-sm lg:hidden hidden">
+      <div class="absolute right-0 top-0 bottom-0 w-[85%] max-w-sm bg-surface-1 border-l border-zinc-800 flex flex-col">
+        <div class="flex items-center justify-between p-4 border-b border-zinc-800">
+          <span class="font-semibold text-white">{locale === 'en' ? 'Navigation' : 'Navegación'}</span>
+          <button id="closeDrawer" class="p-2 rounded-lg hover:bg-surface-3">
+            <svg class="w-5 h-5 text-zinc-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+            </svg>
+          </button>
+        </div>
+        <!-- Drawer Search -->
+        <div class="p-4">
+          <div class="relative">
+            <svg class="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-zinc-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+            </svg>
+            <input type="text" id="drawerSearch" placeholder={locale === 'en' ? 'Search tools…' : 'Buscar herramientas…'} class="w-full pl-10 pr-4 py-3 bg-surface-3 border border-zinc-700/50 rounded-lg text-sm text-zinc-200 placeholder-zinc-500 focus:outline-none focus:border-accent-500/50" />
+          </div>
+        </div>
+        <!-- Drawer Nav -->
+        <div class="flex-1 overflow-y-auto px-4 pb-4 sidebar-scroll">
+          <nav class="space-y-1" id="mobileNav">
+            <a href={`/${locale}/`} class="nav-item flex items-center gap-2.5 px-3 py-2 rounded-md text-[13px] text-zinc-300">
+              <span class="w-1 h-1 rounded-full bg-zinc-700"></span>
+              {locale === 'en' ? 'All tools' : 'Todas las herramientas'}
+            </a>
+            <slot name="mobile-nav" />
+          </nav>
+        </div>
+        <!-- Drawer language -->
+        <div class="p-4 border-t border-zinc-800 flex items-center gap-2 text-xs">
+          <a href={esHref} class={`flex-1 text-center py-2 rounded-lg border ${locale === 'es' ? 'border-accent-600 text-white bg-accent-600/20' : 'border-zinc-700 text-zinc-300'}`}>ES</a>
+          <a href={enHref} class={`flex-1 text-center py-2 rounded-lg border ${locale === 'en' ? 'border-accent-600 text-white bg-accent-600/20' : 'border-zinc-700 text-zinc-300'}`}>EN</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============ MAIN ============ -->
+    <div class="pt-16 min-h-screen">
       <slot />
-    </main>
-    <footer class="site-footer">
-      <p>MultiTools — herramientas gratuitas, privadas y sin servidor. Procesado 100% en tu navegador.</p>
+    </div>
+
+    <footer class="border-t border-zinc-800/50 py-8 px-4 lg:px-6 text-center text-xs text-zinc-600">
+      MultiTools — {locale === 'en' ? 'free, private, serverless tools. 100% processed in your browser.' : 'herramientas gratuitas, privadas y sin servidor. Procesado 100% en tu navegador.'}
     </footer>
+
+    <script is:inline>
+      // Theme toggle
+      (function () {
+        var btn = document.getElementById('themeToggle');
+        if (!btn) return;
+        btn.addEventListener('click', function () {
+          var root = document.documentElement;
+          var isDark = root.classList.toggle('dark');
+          try { localStorage.setItem('theme', isDark ? 'dark' : 'light'); } catch (e) {}
+        });
+      })();
+
+      // Mobile drawer
+      (function () {
+        var openBtn = document.getElementById('mobileMenuBtn');
+        var drawer = document.getElementById('mobileDrawer');
+        var closeBtn = document.getElementById('closeDrawer');
+        if (!openBtn || !drawer) return;
+        function open() { drawer.classList.remove('hidden'); document.body.style.overflow = 'hidden'; }
+        function close() { drawer.classList.add('hidden'); document.body.style.overflow = ''; }
+        openBtn.addEventListener('click', open);
+        if (closeBtn) closeBtn.addEventListener('click', close);
+        drawer.addEventListener('click', function (e) { if (e.target === drawer) close(); });
+        // Close drawer when navigating to a link inside it
+        drawer.querySelectorAll('a[href]').forEach(function (a) {
+          a.addEventListener('click', close);
+        });
+      })();
+
+      // Keyboard shortcut for search (⌘K / Ctrl+K)
+      (function () {
+        document.addEventListener('keydown', function (e) {
+          if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
+            e.preventDefault();
+            var input = document.getElementById('globalSearch');
+            if (input) input.focus();
+          }
+        });
+      })();
+    </script>
   </body>
 </html>

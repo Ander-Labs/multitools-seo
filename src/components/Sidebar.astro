@@ -1,61 +1,90 @@
 ---
-// Categories sidebar. Lists every category with links to the home of that category.
-// Static / client-agnostic: links are computed at build time.
+import { getCollection } from 'astro:content';
+// Category sidebar.
+// Renders categories statically from the tools catalog (Astro getCollection),
+// grouped by the `categoria` (es) / `category` (en) field, with nav-item
+// active states for both the active category and the current tool.
 interface Props {
   locale: 'es' | 'en';
   activeCategory?: string;
+  currentSlug?: string;
 }
-const { locale, activeCategory } = Astro.props;
+const { locale, activeCategory, currentSlug } = Astro.props;
 
-// category key -> { es, en } labels
-const CATS: Record<string, { es: string; en: string }> = {
-  crypto: { es: 'Criptografía', en: 'Cryptography' },
-  converter: { es: 'Conversores', en: 'Converters' },
-  web: { es: 'Web', en: 'Web' },
-  dev: { es: 'Desarrollo', en: 'Development' },
-  network: { es: 'Red', en: 'Network' },
-  math: { es: 'Matemáticas', en: 'Math' },
-  text: { es: 'Texto', en: 'Text' },
-  images: { es: 'Imágenes', en: 'Images' },
-  measurement: { es: 'Medición', en: 'Measurement' },
-  data: { es: 'Datos', en: 'Data' },
-};
+const collection = locale === 'en' ? 'toolsEn' : 'tools';
+const FIELD = locale === 'en' ? 'category' : 'categoria';
+const all = await getCollection(collection as 'tools');
+
+// Group by category field.
+const groups = new Map<string, { slug: string; h1: string }[]>();
+for (const t of all) {
+  const key = (t.data as any)[FIELD] as string;
+  if (!groups.has(key)) groups.set(key, []);
+  groups.get(key)!.push({ slug: t.data.slug, h1: t.data.h1 });
+}
+// Stable display order: by category label.
+const categories = [...groups.entries()].sort((a, b) => a[0].localeCompare(b[0]));
 
 const homeHref = `/${locale}/`;
-const items = Object.entries(CATS).map(([key, labels]) => ({
-  key,
-  label: locale === 'en' ? labels.en : labels.es,
-  href: `/${locale}/herramientas/${key}`,
-  active: activeCategory === (locale === 'en' ? key.charAt(0).toUpperCase() + key.slice(1) : labels.es),
-}));
+const catHref = (cat: string) => `/${locale}/herramientas/${encodeURIComponent(cat)}`;
+const toolHref = (slug: string) => `/${locale}/${slug}`;
 ---
-<aside class="sidebar">
-  <h2 class="sidebar-title">{locale === 'en' ? 'Categories' : 'Categorías'}</h2>
-  <ul class="sidebar-list">
-    <li>
-      <a href={homeHref} class={activeCategory ? '' : 'is-active'}>
+
+<aside class="hidden lg:block w-[250px] shrink-0 border-r border-zinc-800/50 bg-surface-1/50">
+  <div class="sidebar-scroll py-4 px-3">
+    <nav id="desktopNav" class="space-y-4">
+      <a
+        href={homeHref}
+        class={`nav-item flex items-center gap-2.5 px-3 py-1.5 rounded-md text-[13px] ${activeCategory ? 'text-zinc-400' : 'active text-accent-300'}`}
+      >
+        <span class="w-1 h-1 rounded-full bg-accent-500"></span>
         {locale === 'en' ? 'All tools' : 'Todas las herramientas'}
       </a>
-    </li>
-    {items.map((i) => (
-      <li>
-        <a href={i.href} class={i.active ? 'is-active' : ''}>{i.label}</a>
-      </li>
-    ))}
-  </ul>
+      {categories.map(([cat, items]) => (
+        <div class="mb-2">
+          <div class={`flex items-center gap-2 px-3 py-1.5 text-[10px] font-bold uppercase tracking-widest ${activeCategory === cat ? 'text-accent-400' : 'text-zinc-600'}`}>
+            <span class="w-1.5 h-1.5 rounded-full bg-current opacity-60"></span>
+            {cat}
+          </div>
+          <div class="space-y-0.5 mt-1">
+            {items.map((tool) => (
+              <a
+                href={toolHref(tool.slug)}
+                class={`nav-item flex items-center gap-2.5 px-3 py-1.5 rounded-md text-[13px] ${currentSlug === tool.slug ? 'active text-accent-300' : 'text-zinc-400'}`}
+              >
+                <span class="w-1 h-1 rounded-full bg-zinc-700"></span>
+                {tool.h1}
+              </a>
+            ))}
+          </div>
+        </div>
+      ))}
+    </nav>
+  </div>
 </aside>
 
-<style>
-  .sidebar { min-width: 200px; }
-  .sidebar-title { font-size: 13px; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); margin: 0 0 12px; }
-  .sidebar-list { list-style: none; padding: 0; margin: 0; display: grid; gap: 4px; }
-  .sidebar-list a {
-    display: block; padding: 8px 12px; border-radius: 8px; color: var(--text);
-    border: 1px solid transparent; font-size: 14px;
-  }
-  .sidebar-list a:hover { border-color: var(--border); background: var(--surface); }
-  .sidebar-list a.is-active { border-color: var(--accent); color: var(--accent); }
-  @media (max-width: 720px) {
-    .sidebar { width: 100%; }
-  }
-</style>
+<script>
+  // Mirror the desktop sidebar into the mobile drawer nav (single source of truth).
+  (function () {
+    var src = document.getElementById('desktopNav');
+    var dst = document.getElementById('mobileNav');
+    if (src && dst) {
+      // Preserve the leading "All tools" + slot content already in the drawer.
+      var first = dst.firstElementChild;
+      var anchor = first ? first.nextSibling : null;
+      var clone = src.cloneNode(true) as HTMLElement;
+      clone.id = 'mobileNavClone';
+      while (clone.firstElementChild && clone.firstElementChild.tagName === 'A') {
+        clone.removeChild(clone.firstElementChild);
+      }
+      dst.appendChild(clone);
+      // Re-bind close-on-click for the cloned links.
+      clone.querySelectorAll('a[href]').forEach(function (a) {
+        a.addEventListener('click', function () {
+          var drawer = document.getElementById('mobileDrawer');
+          if (drawer) { drawer.classList.add('hidden'); document.body.style.overflow = ''; }
+        });
+      });
+    }
+  })();
+</script>

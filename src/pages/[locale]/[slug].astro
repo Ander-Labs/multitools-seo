@@ -37,6 +37,7 @@ import HtmlEntitiesTool from '../../components/HtmlEntitiesTool.astro';
 import UrlParserTool from '../../components/UrlParserTool.astro';
 import BasicAuthTool from '../../components/BasicAuthTool.astro';
 import OgMetaTool from '../../components/OgMetaTool.astro';
+import ToolIsland from '../../components/ToolIsland.astro';
 import KeycodeTool from '../../components/KeycodeTool.astro';
 import DeviceTool from '../../components/DeviceTool.astro';
 import LoremTool from '../../components/LoremTool.astro';
@@ -115,5 +116,7 @@ const ToolComponent = componentMap[tool.component] ?? Base64Tool;
 const activeCategory = locale === 'en' ? tool.category : tool.categoria;
 ---
 <ToolLayout h1={tool.h1} texto_seo={tool.texto_seo} slug={tool.slug} locale={locale} activeCategory={activeCategory}>
-  <ToolComponent slot="tool" />
+  <ToolIsland slot="tool">
+    <ToolComponent />
+  </ToolIsland>
 </ToolLayout>
