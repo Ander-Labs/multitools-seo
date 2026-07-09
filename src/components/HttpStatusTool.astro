@@ -1,0 +1,21 @@
+---
+const { } = Astro.props;
+---
+<div class="tool-box">
+  <label>Código HTTP
+    <input id="code" type="text" placeholder="200" />
+  </label>
+  <button id="look">Buscar</button>
+  <p id="out" style="margin-top:12px;color:#9aa3b2;"></p>
+</div>
+<script>
+  const box = document.currentScript?.parentElement;
+  if (box) {
+    const code = box.querySelector('#code') as HTMLInputElement;
+    const out = box.querySelector('#out') as HTMLParagraphElement;
+    const m = {200:'OK',201:'Created',301:'Moved Permanently',302:'Found',304:'Not Modified',400:'Bad Request',401:'Unauthorized',403:'Forbidden',404:'Not Found',500:'Internal Server Error',502:'Bad Gateway',503:'Service Unavailable'};
+    box.querySelector('#look')?.addEventListener('click', () => {
+      out.textContent = m[code.value] || 'Código no en la lista común.';
+    });
+  }
+</script>

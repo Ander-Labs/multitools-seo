@@ -1,0 +1,27 @@
+---
+const { } = Astro.props;
+---
+<div class="tool-box">
+  <label>URL con parámetros de tracking (ej: https://x.com/...?utm_...&s=..)
+    <textarea id="url" rows="2" placeholder="https://..."></textarea>
+  </label>
+  <button id="clean">Limpiar</button>
+  <label style="margin-top:12px; display:block;">URL limpia
+    <textarea id="out" rows="2" readonly></textarea>
+  </label>
+</div>
+<script>
+  const box = document.currentScript?.parentElement;
+  if (box) {
+    const url = box.querySelector('#url') as HTMLTextAreaElement;
+    const out = box.querySelector('#out') as HTMLTextAreaElement;
+    const track = ['utm_source','utm_medium','utm_campaign','utm_term','utm_content','s','fbclid','gclid','mc_cid','mc_eid'];
+    box.querySelector('#clean')?.addEventListener('click', () => {
+      try {
+        const u = new URL(url.value);
+        track.forEach(p => u.searchParams.delete(p));
+        out.value = u.toString();
+      } catch { out.value = 'URL inválida.'; }
+    });
+  }
+</script>

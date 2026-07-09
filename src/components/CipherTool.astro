@@ -1,0 +1,32 @@
+---
+const { } = Astro.props;
+---
+<div class="tool-box">
+  <label>Texto a cifrar
+    <textarea id="msg" rows="3" placeholder="Texto..."></textarea>
+  </label>
+  <label>Contraseña
+    <input id="pass" type="text" placeholder="clave" />
+  </label>
+  <button id="enc">Cifrar (AES-GCM)</button>
+  <label style="margin-top:12px; display:block;">Resultado (base64)
+    <textarea id="out" rows="3" readonly></textarea>
+  </label>
+</div>
+<script>
+  const box = document.currentScript?.parentElement;
+  if (box) {
+    const msg = box.querySelector('#msg') as HTMLTextAreaElement;
+    const pass = box.querySelector('#pass') as HTMLInputElement;
+    const out = box.querySelector('#out') as HTMLTextAreaElement;
+    box.querySelector('#enc')?.addEventListener('click', async () => {
+      const enc = new TextEncoder();
+      const key = await crypto.subtle.importKey('raw', await crypto.subtle.digest('SHA-256', enc.encode(pass.value)), { name: 'AES-GCM' }, false, ['encrypt']);
+      const iv = crypto.getRandomValues(new Uint8Array(12));
+      const ct = await crypto.subtle.encrypt({ name: 'AES-GCM', iv }, key, enc.encode(msg.value));
+      const buf = new Uint8Array(iv.length + ct.byteLength);
+      buf.set(iv); buf.set(new Uint8Array(ct), iv.length);
+      out.value = btoa(String.fromCharCode(...buf));
+    });
+  }
+</script>

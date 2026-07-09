@@ -1,0 +1,21 @@
+---
+const { } = Astro.props;
+---
+<div class="tool-box">
+  <button id="gen">Generar frase BIP39 (12 words)</button>
+  <label style="margin-top:12px; display:block;">Mnemonic
+    <textarea id="out" rows="3" readonly></textarea>
+  </label>
+</div>
+<script>
+  const box = document.currentScript?.parentElement;
+  if (box) {
+    const out = box.querySelector('#out') as HTMLTextAreaElement;
+    const W = 'abandon ability able about above absorb abstract abuse access accident';
+    box.querySelector('#gen')?.addEventListener('click', () => {
+      const words = W.split(' ');
+      const pick = Array.from({length:12}, () => words[Math.floor(Math.random()*words.length)]);
+      out.value = pick.join(' ');
+    });
+  }
+</script>

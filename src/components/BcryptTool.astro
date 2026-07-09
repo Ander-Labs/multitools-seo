@@ -1,0 +1,28 @@
+---
+const { } = Astro.props;
+---
+<div class="tool-box">
+  <label>Contraseña a evaluar
+    <input id="pw" type="text" placeholder="tu contraseña" />
+  </label>
+  <button id="eval">Analizar fuerza</button>
+  <p id="out" style="margin-top:12px;color:#9aa3b2;"></p>
+</div>
+<script>
+  const box = document.currentScript?.parentElement;
+  if (box) {
+    const pw = box.querySelector('#pw') as HTMLInputElement;
+    const out = box.querySelector('#out') as HTMLParagraphElement;
+    box.querySelector('#eval')?.addEventListener('click', () => {
+      const v = pw.value;
+      let score = 0;
+      if (v.length >= 8) score++;
+      if (v.length >= 12) score++;
+      if (/[A-Z]/.test(v) && /[a-z]/.test(v)) score++;
+      if (/\d/.test(v)) score++;
+      if (/[^A-Za-z0-9]/.test(v)) score++;
+      const labels = ['Muy débil','Débil','Regular','Buena','Fuerte','Muy fuerte'];
+      out.textContent = `Fuerza: ${labels[score]} (${v.length} chars)`;
+    });
+  }
+</script>

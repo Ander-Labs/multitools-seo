@@ -1,0 +1,24 @@
+---
+const { } = Astro.props;
+---
+<div class="tool-box">
+  <label>User-Agent string
+    <textarea id="ua" rows="2" placeholder="Mozilla/5.0 ..."></textarea>
+  </label>
+  <button id="parse">Parsear</button>
+  <p id="out" style="margin-top:12px;color:#9aa3b2;white-space:pre-wrap;"></p>
+</div>
+<script>
+  const box = document.currentScript?.parentElement;
+  if (box) {
+    const ua = box.querySelector('#ua') as HTMLTextAreaElement;
+    const out = box.querySelector('#out') as HTMLParagraphElement;
+    box.querySelector('#parse')?.addEventListener('click', () => {
+      const s = ua.value;
+      const os = /Windows/.test(s) ? 'Windows' : /Mac/.test(s) ? 'macOS' : /Linux/.test(s) ? 'Linux' : /Android/.test(s) ? 'Android' : /iPhone|iPad/.test(s) ? 'iOS' : 'Desconocido';
+      const br = /Chrome/.test(s) ? 'Chrome' : /Firefox/.test(s) ? 'Firefox' : /Safari/.test(s) ? 'Safari' : 'Desconocido';
+      const mob = /Mobi|Android/.test(s) ? 'Sí' : 'No';
+      out.textContent = `SO: ${os}\nNavegador: ${br}\nMóvil: ${mob}`;
+    });
+  }
+</script>

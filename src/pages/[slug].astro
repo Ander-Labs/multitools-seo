@@ -10,9 +10,22 @@ import UuidTool from '../components/UuidTool.astro';
 import CronTool from '../components/CronTool.astro';
 import ColorTool from '../components/ColorTool.astro';
 import SlugTool from '../components/SlugTool.astro';
+import HmacTool from '../components/HmacTool.astro';
+import RsaTool from '../components/RsaTool.astro';
+import Bip39Tool from '../components/Bip39Tool.astro';
+import BcryptTool from '../components/BcryptTool.astro';
+import OtpTool from '../components/OtpTool.astro';
+import CipherTool from '../components/CipherTool.astro';
+import JwtTool from '../components/JwtTool.astro';
+import UserAgentTool from '../components/UserAgentTool.astro';
+import HttpStatusTool from '../components/HttpStatusTool.astro';
+import MetaTagTool from '../components/MetaTagTool.astro';
+import SafeLinkTool from '../components/SafeLinkTool.astro';
 
 const componentMap: Record<string, any> = {
   Base64Tool, JsonTool, HashTool, UrlTool, CaseTool, UuidTool, CronTool, ColorTool, SlugTool,
+  HmacTool, RsaTool, Bip39Tool, BcryptTool, OtpTool, CipherTool, JwtTool, UserAgentTool,
+  HttpStatusTool, MetaTagTool, SafeLinkTool,
 };
 
 export async function getStaticPaths() {

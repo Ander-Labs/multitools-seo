@@ -1,0 +1,29 @@
+---
+const { } = Astro.props;
+---
+<div class="tool-box">
+  <label>Mensaje
+    <textarea id="msg" rows="3" placeholder="Texto..."></textarea>
+  </label>
+  <label>Clave secreta
+    <input id="key" type="text" placeholder="secret" />
+  </label>
+  <button id="gen">Generar HMAC-SHA256</button>
+  <label style="margin-top:12px; display:block;">Resultado (hex)
+    <textarea id="out" rows="3" readonly></textarea>
+  </label>
+</div>
+<script>
+  const box = document.currentScript?.parentElement;
+  if (box) {
+    const msg = box.querySelector('#msg') as HTMLTextAreaElement;
+    const key = box.querySelector('#key') as HTMLInputElement;
+    const out = box.querySelector('#out') as HTMLTextAreaElement;
+    box.querySelector('#gen')?.addEventListener('click', async () => {
+      const enc = new TextEncoder();
+      const k = await crypto.subtle.importKey('raw', enc.encode(key.value), { name: 'HMAC', hash: 'SHA-256' }, false, ['sign']);
+      const sig = await crypto.subtle.sign('HMAC', k, enc.encode(msg.value));
+      out.value = Array.from(new Uint8Array(sig)).map(b => b.toString(16).padStart(2, '0')).join('');
+    });
+  }
+</script>

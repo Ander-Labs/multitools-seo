@@ -1,0 +1,25 @@
+---
+const { } = Astro.props;
+---
+<div class="tool-box">
+  <label>JWT (3 partes separadas por .)
+    <textarea id="jwt" rows="3" placeholder="header.payload.signature"></textarea>
+  </label>
+  <button id="dec">Decodificar payload</button>
+  <label style="margin-top:12px; display:block;">Payload (JSON)
+    <textarea id="out" rows="5" readonly></textarea>
+  </label>
+</div>
+<script>
+  const box = document.currentScript?.parentElement;
+  if (box) {
+    const jwt = box.querySelector('#jwt') as HTMLTextAreaElement;
+    const out = box.querySelector('#out') as HTMLTextAreaElement;
+    box.querySelector('#dec')?.addEventListener('click', () => {
+      try {
+        const p = jwt.value.split('.')[1].replace(/-/g,'+').replace(/_/g,'/');
+        out.value = JSON.stringify(JSON.parse(decodeURIComponent(escape(atob(p)))), null, 2);
+      } catch { out.value = 'JWT inválido.'; }
+    });
+  }
+</script>

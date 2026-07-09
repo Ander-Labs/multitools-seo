@@ -1,0 +1,28 @@
+---
+const { } = Astro.props;
+---
+<div class="tool-box">
+  <label>Título de la página
+    <input id="title" type="text" placeholder="Mi Página" />
+  </label>
+  <label>Descripción
+    <input id="desc" type="text" placeholder="Descripción..." />
+  </label>
+  <label>URL canónica
+    <input id="url" type="text" placeholder="https://example.com" />
+  </label>
+  <button id="gen">Generar meta tags</button>
+  <label style="margin-top:12px; display:block;">HTML
+    <textarea id="out" rows="6" readonly></textarea>
+  </label>
+</div>
+<script>
+  const box = document.currentScript?.parentElement;
+  if (box) {
+    const g = (id) => box.querySelector('#'+id) as HTMLInputElement;
+    const out = box.querySelector('#out') as HTMLTextAreaElement;
+    box.querySelector('#gen')?.addEventListener('click', () => {
+      out.value = `<title>${g('title').value}</title>\n<meta name="description" content="${g('desc').value}">\n<link rel="canonical" href="${g('url').value}">`;
+    });
+  }
+</script>
