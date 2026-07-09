@@ -5,5 +5,6 @@
   "meta_descripcion": "Crea arte ASCII a partir de texto al instante en tu navegador. Gratis y privado.",
   "h1": "Generador de ASCII Art",
   "texto_seo": "El generador de ASCII Art dibuja tu texto usando fuentes figlet clásicas, perfecto para banners y firmas. Es una herramienta divertida y útil para decorar salidas de terminal o README. Escribe un texto y elige una fuente para obtener el arte ASCII resultante. Esta utilidad se ejecuta íntegramente en tu navegador mediante JavaScript moderno, sin enviar ningún dato a un servidor, lo que garantiza privacidad total y respuestas instantáneas. Es gratuita, no requiere registro y funciona en cualquier dispositivo con un navegador actual. Úsala para ahorrar tiempo en tareas repetitivas, depurar información, validar entradas o aprender cómo funcionan los formatos y estándares implicados. El código es ligero y el procesamiento ocurre de forma local, ideal para desarrolladores, administradores de sistemas y cualquier persona que trabaje con datos diariamente.",
-  "ads_layout": "standard"
+  "ads_layout": "standard",
+  "categoria": "Texto"
 }

@@ -5,5 +5,6 @@
   "meta_descripcion": "Convierte JSON a YAML al instante en tu navegador. Gratis, privado y sin envíos a servidor.",
   "h1": "Convertidor de JSON a YAML",
   "texto_seo": "El convertidor de JSON a YAML permite transformar objetos JSON en documentos YAML legibles. Es útil para generar archivos de configuración, definir pipelines o simplemente inspeccionar datos en un formato más amigable. Pega tu JSON, conviértelo y copia el YAML resultante sin salir de la página. Esta utilidad se ejecuta íntegramente en tu navegador mediante JavaScript moderno, sin enviar ningún dato a un servidor, lo que garantiza privacidad total y respuestas instantáneas. Es gratuita, no requiere registro y funciona en cualquier dispositivo con un navegador actual. Úsala para ahorrar tiempo en tareas repetitivas, depurar información, validar entradas o aprender cómo funcionan los formatos y estándares implicados. El código es ligero y el procesamiento ocurre de forma local, ideal para desarrolladores, administradores de sistemas y cualquier persona que trabaje con datos diariamente.",
-  "ads_layout": "standard"
+  "ads_layout": "standard",
+  "categoria": "Datos"
 }

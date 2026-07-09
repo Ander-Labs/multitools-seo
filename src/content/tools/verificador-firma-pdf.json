@@ -5,5 +5,6 @@
   "meta_descripcion": "Inspecciona firmas de PDF al instante en tu navegador. Gratis y privado.",
   "h1": "Verificador de Firma PDF",
   "texto_seo": "El verificador de firma PDF examina la presencia de campos de firma dentro de un documento PDF. Lee el contenido del archivo de forma local para reportar si contiene firmas digitales. Selecciona un PDF y descubre cuántas firmas contiene su estructura. Esta utilidad se ejecuta íntegramente en tu navegador mediante JavaScript moderno, sin enviar ningún dato a un servidor, lo que garantiza privacidad total y respuestas instantáneas. Es gratuita, no requiere registro y funciona en cualquier dispositivo con un navegador actual. Úsala para ahorrar tiempo en tareas repetitivas, depurar información, validar entradas o aprender cómo funcionan los formatos y estándares implicados. El código es ligero y el procesamiento ocurre de forma local, ideal para desarrolladores, administradores de sistemas y cualquier persona que trabaje con datos diariamente.",
-  "ads_layout": "standard"
+  "ads_layout": "standard",
+  "categoria": "Criptografía"
 }

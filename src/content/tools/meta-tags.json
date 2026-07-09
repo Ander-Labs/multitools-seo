@@ -1,1 +1,10 @@
-{ "slug": "generador-meta-tags", "component": "MetaTagTool", "titulo_seo": "Generador de Meta Tags SEO Gratis", "meta_descripcion": "Genera meta tags HTML en tu navegador. Gratis, privado, sin envíos a servidor.", "h1": "Generador de Meta Tags", "texto_seo": "El generador de meta tags produce las etiquetas HTML esenciales para SEO (title, description, canonical) a partir de tus datos, ayudando a mejorar el posicionamiento y la previsualización en redes sociales. Funciona localmente en tu navegador sin enviar información a servidores, preservando privacidad. Copia el HTML resultante directo a tu plantilla. Genera tus metadatos al instante, gratis y privado.", "ads_layout": "standard" }
+{
+  "slug": "generador-meta-tags",
+  "component": "MetaTagTool",
+  "titulo_seo": "Generador de Meta Tags SEO Gratis",
+  "meta_descripcion": "Genera meta tags HTML en tu navegador. Gratis, privado, sin envíos a servidor.",
+  "h1": "Generador de Meta Tags",
+  "texto_seo": "El generador de meta tags produce las etiquetas HTML esenciales para SEO (title, description, canonical) a partir de tus datos, ayudando a mejorar el posicionamiento y la previsualización en redes sociales. Funciona localmente en tu navegador sin enviar información a servidores, preservando privacidad. Copia el HTML resultante directo a tu plantilla. Genera tus metadatos al instante, gratis y privado.",
+  "ads_layout": "standard",
+  "categoria": "Web"
+}

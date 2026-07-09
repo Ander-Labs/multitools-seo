@@ -5,5 +5,6 @@
   "meta_descripcion": "Prettifica y formatea YAML al instante en tu navegador. Gratis y privado.",
   "h1": "Formato de YAML",
   "texto_seo": "El formateador de YAML parsea y reimprime documentos YAML con sangría y orden consistentes. Ideal para limpiar configuraciones de Kubernetes, CI o docker-compose. Pega tu YAML y obtén una versión estandarizada y legible. Esta utilidad se ejecuta íntegramente en tu navegador mediante JavaScript moderno, sin enviar ningún dato a un servidor, lo que garantiza privacidad total y respuestas instantáneas. Es gratuita, no requiere registro y funciona en cualquier dispositivo con un navegador actual. Úsala para ahorrar tiempo en tareas repetitivas, depurar información, validar entradas o aprender cómo funcionan los formatos y estándares implicados. El código es ligero y el procesamiento ocurre de forma local, ideal para desarrolladores, administradores de sistemas y cualquier persona que trabaje con datos diariamente.",
-  "ads_layout": "standard"
+  "ads_layout": "standard",
+  "categoria": "Datos"
 }

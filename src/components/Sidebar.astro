@@ -1,0 +1,61 @@
+---
+// Categories sidebar. Lists every category with links to the home of that category.
+// Static / client-agnostic: links are computed at build time.
+interface Props {
+  locale: 'es' | 'en';
+  activeCategory?: string;
+}
+const { locale, activeCategory } = Astro.props;
+
+// category key -> { es, en } labels
+const CATS: Record<string, { es: string; en: string }> = {
+  crypto: { es: 'Criptografía', en: 'Cryptography' },
+  converter: { es: 'Conversores', en: 'Converters' },
+  web: { es: 'Web', en: 'Web' },
+  dev: { es: 'Desarrollo', en: 'Development' },
+  network: { es: 'Red', en: 'Network' },
+  math: { es: 'Matemáticas', en: 'Math' },
+  text: { es: 'Texto', en: 'Text' },
+  images: { es: 'Imágenes', en: 'Images' },
+  measurement: { es: 'Medición', en: 'Measurement' },
+  data: { es: 'Datos', en: 'Data' },
+};
+
+const homeHref = `/${locale}/`;
+const items = Object.entries(CATS).map(([key, labels]) => ({
+  key,
+  label: locale === 'en' ? labels.en : labels.es,
+  href: `/${locale}/herramientas/${key}`,
+  active: activeCategory === (locale === 'en' ? key.charAt(0).toUpperCase() + key.slice(1) : labels.es),
+}));
+---
+<aside class="sidebar">
+  <h2 class="sidebar-title">{locale === 'en' ? 'Categories' : 'Categorías'}</h2>
+  <ul class="sidebar-list">
+    <li>
+      <a href={homeHref} class={activeCategory ? '' : 'is-active'}>
+        {locale === 'en' ? 'All tools' : 'Todas las herramientas'}
+      </a>
+    </li>
+    {items.map((i) => (
+      <li>
+        <a href={i.href} class={i.active ? 'is-active' : ''}>{i.label}</a>
+      </li>
+    ))}
+  </ul>
+</aside>
+
+<style>
+  .sidebar { min-width: 200px; }
+  .sidebar-title { font-size: 13px; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); margin: 0 0 12px; }
+  .sidebar-list { list-style: none; padding: 0; margin: 0; display: grid; gap: 4px; }
+  .sidebar-list a {
+    display: block; padding: 8px 12px; border-radius: 8px; color: var(--text);
+    border: 1px solid transparent; font-size: 14px;
+  }
+  .sidebar-list a:hover { border-color: var(--border); background: var(--surface); }
+  .sidebar-list a.is-active { border-color: var(--accent); color: var(--accent); }
+  @media (max-width: 720px) {
+    .sidebar { width: 100%; }
+  }
+</style>

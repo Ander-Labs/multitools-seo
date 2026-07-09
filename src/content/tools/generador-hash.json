@@ -5,5 +5,6 @@
   "meta_descripcion": "Genera el hash SHA-256 de cualquier texto al instante en tu navegador. Herramienta gratuita, sin envíos a servidor, privada y rápida.",
   "h1": "Generador de Hash SHA-256",
   "texto_seo": "El generador de hash SHA-256 permite calcular la huella digital de un texto utilizando el algoritmo Secure Hash Algorithm 256 bits, ampliamente usado para verificar integridad de archivos y almacenar contraseñas de forma segura. SHA-256 forma parte de la familia SHA-2 y produce una salida de 64 caracteres hexadecimales prácticamente única para cada entrada. Esta herramienta calcula el hash directamente en tu navegador mediante la API SubtleCrypto del estándar Web Crypto, lo que significa que tu información nunca abandona el dispositivo. Es ideal para desarrolladores que necesitan validar checksums, firmar datos o comparar integridad sin depender de librerías externas ni conexiones de red. Escribe tu texto y obtén el resumen criptográfico al instante, de forma gratuita y privada.",
-  "ads_layout": "standard"
+  "ads_layout": "standard",
+  "categoria": "Criptografía"
 }

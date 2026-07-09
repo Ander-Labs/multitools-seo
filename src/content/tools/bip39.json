@@ -1,1 +1,10 @@
-{ "slug": "generador-bip39", "component": "Bip39Tool", "titulo_seo": "Generador de Frase Mnemónica BIP39 Gratis", "meta_descripcion": "Genera frases mnemónicas BIP39 en tu navegador. Gratis, privado, sin envíos a servidor.", "h1": "Generador BIP39", "texto_seo": "El generador BIP39 produce una frase mnemónica de 12 palabras usada para respaldar wallets de criptomonedas de forma legible por humanos. Esta herramienta genera la frase localmente en tu navegador, sin conexión de red, preservando la privacidad de tu semilla. Es útil para entender la estructura de recuperación de wallets, aunque para fondos reales debes usar un generador offline dedicado. Obtén tu frase al instante, de forma gratuita y privada.", "ads_layout": "standard" }
+{
+  "slug": "generador-bip39",
+  "component": "Bip39Tool",
+  "titulo_seo": "Generador de Frase Mnemónica BIP39 Gratis",
+  "meta_descripcion": "Genera frases mnemónicas BIP39 en tu navegador. Gratis, privado, sin envíos a servidor.",
+  "h1": "Generador BIP39",
+  "texto_seo": "El generador BIP39 produce una frase mnemónica de 12 palabras usada para respaldar wallets de criptomonedas de forma legible por humanos. Esta herramienta genera la frase localmente en tu navegador, sin conexión de red, preservando la privacidad de tu semilla. Es útil para entender la estructura de recuperación de wallets, aunque para fondos reales debes usar un generador offline dedicado. Obtén tu frase al instante, de forma gratuita y privada.",
+  "ads_layout": "standard",
+  "categoria": "Criptografía"
+}

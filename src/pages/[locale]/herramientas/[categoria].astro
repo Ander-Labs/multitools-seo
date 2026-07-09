@@ -1,0 +1,54 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../../../layouts/Layout.astro';
+import Sidebar from '../../../components/Sidebar.astro';
+
+export async function getStaticPaths() {
+  const esTools = await getCollection('tools');
+  const enTools = await getCollection('toolsEn');
+  const paths: any[] = [];
+  // ES: group by `categoria` (ES label). EN: group by `category` (EN label).
+  for (const locale of ['es', 'en'] as const) {
+    const set = locale === 'es' ? esTools : enTools;
+    const groups = new Map<string, { slug: string; h1: string }[]>();
+    for (const t of set) {
+      const key = locale === 'es' ? t.data.categoria : t.data.category;
+      if (!groups.has(key)) groups.set(key, []);
+      groups.get(key)!.push({ slug: t.data.slug, h1: t.data.h1 });
+    }
+    for (const [cat, items] of groups) {
+      paths.push({
+        params: { locale, categoria: cat },
+        props: { locale, categoria: cat, items },
+      });
+    }
+  }
+  return paths;
+}
+
+const { locale, categoria, items } = Astro.props;
+---
+<Layout titulo_seo={`${categoria} — ${locale === 'en' ? 'Tools' : 'Herramientas'}`} locale={locale}>
+  <div class="cat-layout">
+    <Sidebar locale={locale} activeCategory={categoria} />
+    <div class="cat-content">
+      <h1>{categoria}</h1>
+      <ul class="tool-list">
+        {items.map((t: any) => (
+          <li><a href={`/${locale}/${t.slug}`}>{t.h1}</a></li>
+        ))}
+      </ul>
+    </div>
+  </div>
+</Layout>
+
+<style>
+  .cat-layout { display: flex; gap: 32px; align-items: flex-start; }
+  .cat-content { flex: 1; min-width: 0; }
+  .tool-list { list-style: none; padding: 0; display: grid; gap: 12px; }
+  .tool-list a { display: block; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 16px; color: var(--text); font-weight: 600; }
+  .tool-list a:hover { border-color: var(--accent); }
+  @media (max-width: 720px) {
+    .cat-layout { flex-direction: column; gap: 20px; }
+  }
+</style>

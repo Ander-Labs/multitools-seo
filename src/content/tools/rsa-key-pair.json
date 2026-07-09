@@ -1,1 +1,10 @@
-{ "slug": "generador-rsa", "component": "RsaTool", "titulo_seo": "Generador de Claves RSA 2048 Online Gratis", "meta_descripcion": "Genera par de claves RSA 2048 en tu navegador. Gratis, privado, sin envíos a servidor.", "h1": "Generador de Claves RSA", "texto_seo": "El generador RSA crea un par de claves pública y privada de 2048 bits directamente en tu navegador usando criptografía de curva estándar. Es útil para TLS, firma de documentos, SSH y cifrado asimétrico sin depender de herramientas de línea de comandos. Todo el proceso ocurre localmente vía Web Crypto API, por lo que las claves nunca abandonan tu dispositivo. Genera, copia y usa tus claves en segundos, gratis y con privacidad garantizada.", "ads_layout": "standard" }
+{
+  "slug": "generador-rsa",
+  "component": "RsaTool",
+  "titulo_seo": "Generador de Claves RSA 2048 Online Gratis",
+  "meta_descripcion": "Genera par de claves RSA 2048 en tu navegador. Gratis, privado, sin envíos a servidor.",
+  "h1": "Generador de Claves RSA",
+  "texto_seo": "El generador RSA crea un par de claves pública y privada de 2048 bits directamente en tu navegador usando criptografía de curva estándar. Es útil para TLS, firma de documentos, SSH y cifrado asimétrico sin depender de herramientas de línea de comandos. Todo el proceso ocurre localmente vía Web Crypto API, por lo que las claves nunca abandonan tu dispositivo. Genera, copia y usa tus claves en segundos, gratis y con privacidad garantizada.",
+  "ads_layout": "standard",
+  "categoria": "Criptografía"
+}

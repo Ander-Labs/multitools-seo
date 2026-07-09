@@ -5,5 +5,6 @@
   "meta_descripcion": "Compara dos objetos JSON y resalta diferencias al instante en tu navegador. Gratis y privado.",
   "h1": "Diferencia de JSON",
   "texto_seo": "El comparador de JSON analiza dos objetos y lista las claves que difieren entre ambos. Es perfecto para detectar cambios en respuestas de API, configuraciones o payloads. Pega ambos JSON y obtén un informe de diferencias claro y estructurado. Esta utilidad se ejecuta íntegramente en tu navegador mediante JavaScript moderno, sin enviar ningún dato a un servidor, lo que garantiza privacidad total y respuestas instantáneas. Es gratuita, no requiere registro y funciona en cualquier dispositivo con un navegador actual. Úsala para ahorrar tiempo en tareas repetitivas, depurar información, validar entradas o aprender cómo funcionan los formatos y estándares implicados. El código es ligero y el procesamiento ocurre de forma local, ideal para desarrolladores, administradores de sistemas y cualquier persona que trabaje con datos diariamente.",
-  "ads_layout": "standard"
+  "ads_layout": "standard",
+  "categoria": "Datos"
 }

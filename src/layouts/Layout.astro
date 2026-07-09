@@ -3,27 +3,40 @@ import '../styles/global.css';
 interface Props {
   titulo_seo?: string;
   meta_descripcion?: string;
+  locale?: 'es' | 'en';
 }
 const {
   titulo_seo = 'MultiTools — Herramientas gratuitas para desarrolladores',
   meta_descripcion = 'Colección de micro-herramientas online gratuitas para desarrolladores. Rápidas, privadas y sin envíos a servidor.',
+  locale = 'es',
 } = Astro.props;
+
+const SITE = Astro.site?.href?.replace(/\/$/, '') ?? '';
+// Current path without the leading locale prefix, e.g. /es/base64 -> /base64
+const fullPath = Astro.url.pathname.replace(/\/$/, '') || '/';
+const rest = fullPath.replace(/^\/(es|en)(?=\/|$)/, '') || '';
+const esHref = `${SITE}/es${rest}`;
+const enHref = `${SITE}/en${rest}`;
+const xDefault = `${SITE}/es${rest}`;
 ---
 <!doctype html>
-<html lang="es">
+<html lang={locale}>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{titulo_seo}</title>
     <meta name="description" content={meta_descripcion} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="alternate" hreflang="es" href={esHref} />
+    <link rel="alternate" hreflang="en" href={enHref} />
+    <link rel="alternate" hreflang="x-default" href={xDefault} />
     <slot name="head" />
   </head>
   <body>
     <header class="site-header">
-      <a href="/" class="brand">MultiTools</a>
-      <nav>
-        <a href="/herramientas">Herramientas</a>
+      <a href={`/${locale}/`} class="brand">MultiTools</a>
+      <nav class="site-nav">
+        <a href={`/${locale}/`}>{locale === 'en' ? 'Tools' : 'Herramientas'}</a>
       </nav>
     </header>
     <main class="site-main">

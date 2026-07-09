@@ -1,1 +1,10 @@
-{ "slug": "generador-hmac", "component": "HmacTool", "titulo_seo": "Generador HMAC-SHA256 Online Gratis", "meta_descripcion": "Firma mensajes con HMAC-SHA256 en tu navegador. Gratis, privado, sin envíos a servidor.", "h1": "Generador HMAC-SHA256", "texto_seo": "El generador HMAC (Hash-based Message Authentication Code) permite verificar integridad y autenticidad de un mensaje usando una clave secreta compartida. Esta herramienta calcula HMAC-SHA256 íntegramente en tu navegador mediante la Web Crypto API, sin enviar tu clave ni mensaje a ningún servidor, garantizando privacidad total. Es fundamental en APIs para firmar requests, validar webhooks y proteger comunicaciones entre servicios. Escribe tu mensaje y clave, y obtén la firma hexadecimal al instante, de forma gratuita y segura.", "ads_layout": "standard" }
+{
+  "slug": "generador-hmac",
+  "component": "HmacTool",
+  "titulo_seo": "Generador HMAC-SHA256 Online Gratis",
+  "meta_descripcion": "Firma mensajes con HMAC-SHA256 en tu navegador. Gratis, privado, sin envíos a servidor.",
+  "h1": "Generador HMAC-SHA256",
+  "texto_seo": "El generador HMAC (Hash-based Message Authentication Code) permite verificar integridad y autenticidad de un mensaje usando una clave secreta compartida. Esta herramienta calcula HMAC-SHA256 íntegramente en tu navegador mediante la Web Crypto API, sin enviar tu clave ni mensaje a ningún servidor, garantizando privacidad total. Es fundamental en APIs para firmar requests, validar webhooks y proteger comunicaciones entre servicios. Escribe tu mensaje y clave, y obtén la firma hexadecimal al instante, de forma gratuita y segura.",
+  "ads_layout": "standard",
+  "categoria": "Criptografía"
+}

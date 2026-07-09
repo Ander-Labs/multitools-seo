@@ -5,5 +5,6 @@
   "meta_descripcion": "Convierte colores entre HEX y RGB al instante en tu navegador. Herramienta gratuita, privada y sin envíos a servidor.",
   "h1": "Convertidor de Color HEX a RGB",
   "texto_seo": "El convertidor de color permite transformar valores HEX (#RRGGBB) a su equivalente RGB y viceversa, facilitando el trabajo entre diseño y desarrollo web. Es útil para temas, estilos CSS y componentes de interfaz donde se mezclan ambos formatos. La conversión ocurre íntegramente en tu navegador mediante aritmética simple sobre los canales de color, sin enviar datos a ningún servidor, preservando privacidad. Esta herramienta ayuda a mantener consistencia visual en proyectos frontend y a interpretar rápidamente paletas de terceros. Pega un color y obtén su equivalente al instante, de forma gratuita y sin registro.",
-  "ads_layout": "standard"
+  "ads_layout": "standard",
+  "categoria": "Conversores"
 }

@@ -5,5 +5,6 @@
   "meta_descripcion": "Muestra datos de tu dispositivo al instante en tu navegador. Gratis y privado.",
   "h1": "Información del Dispositivo",
   "texto_seo": "La herramienta de información del dispositivo revela datos como tamaño de pantalla, pixel ratio y user agent. Ayuda a depurar diseño responsive y detectar capacidades del navegador del usuario. Toda la información se obtiene localmente sin enviar nada a servidores externos. Esta utilidad se ejecuta íntegramente en tu navegador mediante JavaScript moderno, sin enviar ningún dato a un servidor, lo que garantiza privacidad total y respuestas instantáneas. Es gratuita, no requiere registro y funciona en cualquier dispositivo con un navegador actual. Úsala para ahorrar tiempo en tareas repetitivas, depurar información, validar entradas o aprender cómo funcionan los formatos y estándares implicados. El código es ligero y el procesamiento ocurre de forma local, ideal para desarrolladores, administradores de sistemas y cualquier persona que trabaje con datos diariamente.",
-  "ads_layout": "standard"
+  "ads_layout": "standard",
+  "categoria": "Desarrollo"
 }

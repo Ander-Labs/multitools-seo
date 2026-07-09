@@ -3,24 +3,38 @@ interface Props {
   h1: string;
   texto_seo: string;
   slug: string;
+  locale: 'es' | 'en';
+  activeCategory?: string;
 }
-const { h1, texto_seo, slug } = Astro.props;
+const { h1, texto_seo, slug, locale, activeCategory } = Astro.props;
 import { getCollection } from 'astro:content';
 import Layout from './Layout.astro';
-const tools = (await getCollection('tools')).map(t => ({ slug: t.data.slug, h1: t.data.h1 }));
+import Sidebar from '../components/Sidebar.astro';
+
+const tools = (await getCollection('tools')).map(t => ({ slug: t.data.slug, h1: t.data.h1, component: t.data.component }));
 const current = tools.find(t => t.slug === slug);
 ---
-<Layout titulo_seo={current?.h1} meta_descripcion={texto_seo.slice(0,160)}>
-  <h1>{h1}</h1>
-  <article class="seo-text">
-    <Fragment set:html={texto_seo} />
-  </article>
-  <section class="tool-island" data-component={current?.component} data-slug={slug}>
-    <slot name="tool" />
-  </section>
+<Layout titulo_seo={current?.h1} meta_descripcion={texto_seo.slice(0,160)} locale={locale}>
+  <div class="tool-layout">
+    <Sidebar locale={locale} activeCategory={activeCategory} />
+    <div class="tool-content">
+      <h1>{h1}</h1>
+      <article class="seo-text">
+        <Fragment set:html={texto_seo} />
+      </article>
+      <section class="tool-island" data-component={current?.component} data-slug={slug}>
+        <slot name="tool" />
+      </section>
+    </div>
+  </div>
 </Layout>
 
 <style>
+  .tool-layout { display: flex; gap: 32px; align-items: flex-start; }
+  .tool-content { flex: 1; min-width: 0; }
   .seo-text { max-width: 720px; color: #cbd5e1; line-height: 1.7; font-size: 16px; }
   .tool-island { margin: 30px 0; }
+  @media (max-width: 720px) {
+    .tool-layout { flex-direction: column; gap: 20px; }
+  }
 </style>

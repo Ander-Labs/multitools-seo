@@ -5,5 +5,6 @@
   "meta_descripcion": "Codifica y decodifica URLs y texto para uso web al instante en tu navegador. Herramienta gratuita, privada y sin envíos a servidor.",
   "h1": "Codificador y Decodificador de URL",
   "texto_seo": "El codificador de URL es esencial para preparar parámetros de consulta, enlaces con caracteres especiales y datos enviados por GET sin romper la sintaxis HTTP. La codificación porcentual reemplaza espacios y símbolos reservados (como ?, &, #, /) por secuencias %XX seguras para transmisión. Esta herramienta funciona íntegramente en tu navegador mediante las funciones nativas encodeURIComponent y decodeURIComponent, garantizando que ningún dato salga de tu dispositivo. Es útil para depurar APIs, construir enlaces de seguimiento o sanitizar entradas de usuario antes de enviarlas a un backend. Pega tu texto o URL y obtén el resultado al instante, de forma gratuita y privada.",
-  "ads_layout": "standard"
+  "ads_layout": "standard",
+  "categoria": "Web"
 }

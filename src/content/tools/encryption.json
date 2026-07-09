@@ -1,1 +1,10 @@
-{ "slug": "cifrador-aes", "component": "CipherTool", "titulo_seo": "Cifrador AES-GCM Online Gratis", "meta_descripcion": "Cifra texto con AES-GCM en tu navegador. Gratis, privado, sin envíos a servidor.", "h1": "Cifrador AES-GCM", "texto_seo": "El cifrador AES-GCM protege texto usando cifrado simétrico de grado militar (Advanced Encryption Standard, modo Galois/Counter) directamente en tu navegador. La clave se deriva de tu contraseña vía SHA-256 y los datos jamás salen del dispositivo, garantizando privacidad total. Es útil para enviar información sensible de forma segura o aprender criptografía moderna. Cifra tu mensaje al instante, de forma gratuita y privada.", "ads_layout": "standard" }
+{
+  "slug": "cifrador-aes",
+  "component": "CipherTool",
+  "titulo_seo": "Cifrador AES-GCM Online Gratis",
+  "meta_descripcion": "Cifra texto con AES-GCM en tu navegador. Gratis, privado, sin envíos a servidor.",
+  "h1": "Cifrador AES-GCM",
+  "texto_seo": "El cifrador AES-GCM protege texto usando cifrado simétrico de grado militar (Advanced Encryption Standard, modo Galois/Counter) directamente en tu navegador. La clave se deriva de tu contraseña vía SHA-256 y los datos jamás salen del dispositivo, garantizando privacidad total. Es útil para enviar información sensible de forma segura o aprender criptografía moderna. Cifra tu mensaje al instante, de forma gratuita y privada.",
+  "ads_layout": "standard",
+  "categoria": "Criptografía"
+}

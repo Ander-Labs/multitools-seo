@@ -5,5 +5,6 @@
   "meta_descripcion": "Busca el fabricante de una MAC al instante en tu navegador. Gratis y privado.",
   "h1": "Buscador de MAC",
   "texto_seo": "El buscador de MAC identifica el prefijo OUI (Organizationally Unique Identifier) y suposible fabricante. Emplea una tabla local de los principales prefijos para funcionar sin conexión. Pega una dirección MAC y descubre el fabricante asociado. Esta utilidad se ejecuta íntegramente en tu navegador mediante JavaScript moderno, sin enviar ningún dato a un servidor, lo que garantiza privacidad total y respuestas instantáneas. Es gratuita, no requiere registro y funciona en cualquier dispositivo con un navegador actual. Úsala para ahorrar tiempo en tareas repetitivas, depurar información, validar entradas o aprender cómo funcionan los formatos y estándares implicados. El código es ligero y el procesamiento ocurre de forma local, ideal para desarrolladores, administradores de sistemas y cualquier persona que trabaje con datos diariamente.",
-  "ads_layout": "standard"
+  "ads_layout": "standard",
+  "categoria": "Red"
 }

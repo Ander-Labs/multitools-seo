@@ -1,1 +1,10 @@
-{ "slug": "generador-otp", "component": "OtpTool", "titulo_seo": "Generador de Código OTP (2FA) Gratis", "meta_descripcion": "Genera códigos OTP de un solo uso en tu navegador. Gratis, privado, sin envíos a servidor.", "h1": "Generador OTP", "texto_seo": "El generador OTP (One-Time Password) crea códigos de verificación de dos factores basados en tiempo (TOTP) a partir de un secreto compartido. Esta herramienta calcula el código localmente en tu navegador, sin enviar el secreto a servidores, ideal para entender y validar flujos 2FA. Úsalo para pruebas de integración o aprendizaje de autenticación multifactor. Obtén tu código de 6 dígitos al instante, gratis y privado.", "ads_layout": "standard" }
+{
+  "slug": "generador-otp",
+  "component": "OtpTool",
+  "titulo_seo": "Generador de Código OTP (2FA) Gratis",
+  "meta_descripcion": "Genera códigos OTP de un solo uso en tu navegador. Gratis, privado, sin envíos a servidor.",
+  "h1": "Generador OTP",
+  "texto_seo": "El generador OTP (One-Time Password) crea códigos de verificación de dos factores basados en tiempo (TOTP) a partir de un secreto compartido. Esta herramienta calcula el código localmente en tu navegador, sin enviar el secreto a servidores, ideal para entender y validar flujos 2FA. Úsalo para pruebas de integración o aprendizaje de autenticación multifactor. Obtén tu código de 6 dígitos al instante, gratis y privado.",
+  "ads_layout": "standard",
+  "categoria": "Criptografía"
+}

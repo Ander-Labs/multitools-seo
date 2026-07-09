@@ -5,5 +5,6 @@
   "meta_descripcion": "Convierte texto a minúsculas, MAYÚSCULAS o Título al instante en tu navegador. Herramienta gratuita, privada y sin envíos a servidor.",
   "h1": "Convertidor de Mayúsculas y Minúsculas",
   "texto_seo": "El convertidor de caso es una utilidad rápida para normalizar texto en documentos, código o contenido web. Permite transformar cualquier cadena a minúsculas, mayúsculas o formato título (cada palabra con inicial capitalizada) con un solo clic. Todo el procesamiento es local mediante métodos nativos de JavaScript, sin enviar información a servidores externos, preservando la privacidad de tus textos. Es especialmente útil para preparar metadatos SEO, encabezados consistentes o limpiar copias de contenido pegado de distintas fuentes. Escribe o pega tu texto y obtén las variantes al instante, gratis y sin registro.",
-  "ads_layout": "standard"
+  "ads_layout": "standard",
+  "categoria": "Texto"
 }

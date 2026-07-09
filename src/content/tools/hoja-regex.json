@@ -5,5 +5,6 @@
   "meta_descripcion": "Consulta la sintaxis de expresiones regulares al instante en tu navegador. Gratis y privado.",
   "h1": "Hoja de Referencia Regex",
   "texto_seo": "La hoja de referencia Regex resume los metacaracteres y construcciones más importantes de JavaScript. Perfecta para recordar cómo usar grupos, cuantificadores y clases sin buscar en la documentación. Consulta la tabla y aplica lo aprendido en el probador de regex. Esta utilidad se ejecuta íntegramente en tu navegador mediante JavaScript moderno, sin enviar ningún dato a un servidor, lo que garantiza privacidad total y respuestas instantáneas. Es gratuita, no requiere registro y funciona en cualquier dispositivo con un navegador actual. Úsala para ahorrar tiempo en tareas repetitivas, depurar información, validar entradas o aprender cómo funcionan los formatos y estándares implicados. El código es ligero y el procesamiento ocurre de forma local, ideal para desarrolladores, administradores de sistemas y cualquier persona que trabaje con datos diariamente.",
-  "ads_layout": "standard"
+  "ads_layout": "standard",
+  "categoria": "Desarrollo"
 }
