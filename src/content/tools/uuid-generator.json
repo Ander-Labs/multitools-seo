@@ -1,0 +1,9 @@
+{
+  "slug": "generador-uuid",
+  "component": "UuidTool",
+  "titulo_seo": "Generador de UUID v4 Online Gratis",
+  "meta_descripcion": "Genera identificadores únicos UUID v4 al instante en tu navegador. Herramienta gratuita, privada y sin envíos a servidor.",
+  "h1": "Generador de UUID v4",
+  "texto_seo": "El generador de UUID (Universally Unique Identifier) crea identificadores únicos versión 4 basados en aleatoriedad criptográfica, ideales para claves primarias, tokens de sesión o identificadores de entidad en bases de datos y APIs. Esta herramienta utiliza la API crypto.randomUUID del navegador, que emplea un generador de números aleatorios seguro, garantizando colisiones prácticamente imposibles. Todo ocurre localmente sin conexión de red, preservando privacidad. Es útil para desarrolladores que necesitan IDs únicos sin depender de librerías externas ni de un backend. Haz clic y obtén tu UUID al instante, de forma gratuita.",
+  "ads_layout": "standard"
+}

@@ -1,0 +1,24 @@
+---
+const { } = Astro.props;
+---
+<div class="tool-box">
+  <label>Expresión cron (ej: */5 * * * *)
+    <input id="cron" type="text" placeholder="*/5 * * * *" />
+  </label>
+  <button id="explain">Explicar</button>
+  <p id="output" style="margin-top:12px;color:#9aa3b2;"></p>
+</div>
+
+<script>
+  const box = document.currentScript?.parentElement;
+  if (box) {
+    const cron = box.querySelector('#cron') as HTMLInputElement;
+    const out = box.querySelector('#output') as HTMLParagraphElement;
+    const parts = ['minuto', 'hora', 'día del mes', 'mes', 'día de semana'];
+    box.querySelector('#explain')?.addEventListener('click', () => {
+      const f = cron.value.trim().split(/\s+/);
+      if (f.length !== 5) { out.textContent = 'Cron debe tener 5 campos.'; return; }
+      out.textContent = f.map((v, i) => `${parts[i]}: ${v}`).join('  |  ');
+    });
+  }
+</script>

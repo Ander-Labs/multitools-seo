@@ -1,0 +1,9 @@
+{
+  "slug": "generador-crontab",
+  "component": "CronTool",
+  "titulo_seo": "Generador y Explicador de Crontab Online Gratis",
+  "meta_descripcion": "Explica y valida expresiones cron al instante en tu navegador. Herramienta gratuita, privada y sin envíos a servidor.",
+  "h1": "Generador y Explicador de Crontab",
+  "texto_seo": "El explicador de crontab desglosa expresiones de programación de tareas en sus cinco campos (minuto, hora, día del mes, mes y día de la semana) para que cualquier desarrollador o administrador de sistemas comprenda exactamente cuándo se ejecutará una tarea programada. Esta herramienta interpreta la sintaxis localmente en tu navegador, sin enviar datos a servidores, ayudándote a depurar configuraciones de cron en servidores Linux, CI/CD y orquestadores. Evita errores costosos por expresiones mal formadas validando la estructura antes de aplicarla. Escribe tu expresión y obtén la explicación clara al instante, gratis y privado.",
+  "ads_layout": "standard"
+}

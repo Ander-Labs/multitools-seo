@@ -1,0 +1,27 @@
+---
+const { } = Astro.props;
+---
+<div class="tool-box">
+  <label>Texto a convertir en slug
+    <input id="input" type="text" placeholder="Mi Título De Post" />
+  </label>
+  <button id="slug">Generar slug</button>
+  <label style="margin-top:12px; display:block;">Resultado
+    <textarea id="output" rows="2" readonly></textarea>
+  </label>
+</div>
+
+<script>
+  const box = document.currentScript?.parentElement;
+  if (box) {
+    const input = box.querySelector('#input') as HTMLInputElement;
+    const output = box.querySelector('#output') as HTMLTextAreaElement;
+    box.querySelector('#slug')?.addEventListener('click', () => {
+      output.value = input.value
+        .toLowerCase()
+        .normalize('NFD').replace(/[̀-ͯ]/g, '')
+        .replace(/[^a-z0-9]+/g, '-')
+        .replace(/^-+|-+$/g, '');
+    });
+  }
+</script>

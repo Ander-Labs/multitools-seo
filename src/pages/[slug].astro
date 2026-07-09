@@ -2,6 +2,18 @@
 import { getCollection } from 'astro:content';
 import ToolLayout from '../layouts/ToolLayout.astro';
 import Base64Tool from '../components/Base64Tool.astro';
+import JsonTool from '../components/JsonTool.astro';
+import HashTool from '../components/HashTool.astro';
+import UrlTool from '../components/UrlTool.astro';
+import CaseTool from '../components/CaseTool.astro';
+import UuidTool from '../components/UuidTool.astro';
+import CronTool from '../components/CronTool.astro';
+import ColorTool from '../components/ColorTool.astro';
+import SlugTool from '../components/SlugTool.astro';
+
+const componentMap: Record<string, any> = {
+  Base64Tool, JsonTool, HashTool, UrlTool, CaseTool, UuidTool, CronTool, ColorTool, SlugTool,
+};
 
 export async function getStaticPaths() {
   const tools = await getCollection('tools');
@@ -12,7 +24,8 @@ export async function getStaticPaths() {
 }
 
 const { tool } = Astro.props;
+const ToolComponent = componentMap[tool.component] ?? Base64Tool;
 ---
 <ToolLayout h1={tool.h1} texto_seo={tool.texto_seo} slug={tool.slug}>
-  <Base64Tool slot="tool" mode="encode" />
+  <ToolComponent slot="tool" />
 </ToolLayout>

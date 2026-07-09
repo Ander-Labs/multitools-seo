@@ -1,0 +1,9 @@
+{
+  "slug": "generador-slug",
+  "component": "SlugTool",
+  "titulo_seo": "Generador de Slug para URLs Online Gratis",
+  "meta_descripcion": "Convierte títulos en slugs SEO amigables al instante en tu navegador. Herramienta gratuita, privada y sin envíos a servidor.",
+  "h1": "Generador de Slug para URLs",
+  "texto_seo": "El generador de slug convierte cualquier título o frase en una URL amigable para SEO, eliminando acentos, espacios y caracteres especiales, y reemplazándolos por guiones. Los slugs limpios mejoran la legibilidad de enlaces, favorecen el posicionamiento en buscadores y evitan errores de codificación en rutas. Esta herramienta normaliza el texto localmente en tu navegador usando descomposición Unicode y expresiones regulares, sin enviar datos a servidores externos. Es ideal para blogs, documentación y plataformas de contenido que necesitan URLs consistentes en español. Escribe tu título y obtén el slug al instante, gratis y privado.",
+  "ads_layout": "standard"
+}
