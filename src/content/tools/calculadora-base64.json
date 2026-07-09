@@ -1,0 +1,9 @@
+{
+  "slug": "codificador-base64",
+  "component": "Base64Tool",
+  "titulo_seo": "Codificador y Decodificador Base64 Online Gratis",
+  "meta_descripcion": "Codifica y decodifica texto a Base64 al instante desde el navegador. Herramienta gratuita, sin envíos a servidor, privada y rápida.",
+  "h1": "Codificador y Decodificador Base64",
+  "texto_seo": "El codificador Base64 es una herramienta esencial para desarrolladores que necesitan convertir texto legible en una representación segura para transmisión en protocolos que solo aceptan caracteres ASCII. Base64 es un esquema de codificación que transforma datos binarios en una cadena de caracteres formada por letras mayúsculas y minúsculas, dígitos y los símbolos + y /. Esta herramienta funciona completamente en tu navegador: ningún dato se envía a ningún servidor, lo que garantiza privacidad total. Es útil para incrustar imágenes en CSS mediante data URIs, codificar credenciales en cabeceras de autenticación HTTP Basic, o preparar payloads para APIs. Simplemente escribe o pega tu texto en el campo correspondiente y obtén el resultado al instante, con opciones para copiar al portapapeles. Todo el procesamiento es local y gratuito.",
+  "ads_layout": "standard"
+}

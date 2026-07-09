@@ -1,0 +1,18 @@
+---
+import { getCollection } from 'astro:content';
+import ToolLayout from '../layouts/ToolLayout.astro';
+import Base64Tool from '../components/Base64Tool.astro';
+
+export async function getStaticPaths() {
+  const tools = await getCollection('tools');
+  return tools.map((t) => ({
+    params: { slug: t.data.slug },
+    props: { tool: t.data },
+  }));
+}
+
+const { tool } = Astro.props;
+---
+<ToolLayout h1={tool.h1} texto_seo={tool.texto_seo} slug={tool.slug}>
+  <Base64Tool slot="tool" mode="encode" />
+</ToolLayout>

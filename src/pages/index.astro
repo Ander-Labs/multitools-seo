@@ -1,0 +1,22 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../layouts/Layout.astro';
+
+const tools = (await getCollection('tools')).map(t => ({ slug: t.data.slug, h1: t.data.h1 }));
+---
+<Layout>
+  <h1>Herramientas gratuitas para desarrolladores</h1>
+  <p class="sub">Procesado 100% en tu navegador. Sin envíos a servidor, privado y rápido.</p>
+  <ul class="tool-list">
+    {tools.map(t => (
+      <li><a href={`/${t.slug}`}>{t.h1}</a></li>
+    ))}
+  </ul>
+</Layout>
+
+<style>
+  .sub { color: #9aa3b2; }
+  .tool-list { list-style: none; padding: 0; display: grid; gap: 12px; }
+  .tool-list a { display: block; background: #111827; border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; padding: 16px; color: #e6e8eb; font-weight: 600; }
+  .tool-list a:hover { border-color: #7dd3fc; }
+</style>

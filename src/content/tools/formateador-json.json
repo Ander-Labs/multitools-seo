@@ -1,0 +1,9 @@
+{
+  "slug": "formateador-json",
+  "component": "JsonTool",
+  "titulo_seo": "Formateador de JSON Online Gratis",
+  "meta_descripcion": "Formatea, valida e indenta JSON al instante en tu navegador. Herramienta gratuita, sin envíos a servidor, privada y rápida.",
+  "h1": "Formateador de JSON",
+  "texto_seo": "El formateador de JSON es una utilidad indispensable para cualquier desarrollador que trabaje con APIs o archivos de configuración. Convierte JSON compacto e ilegible en una estructura indentada y legible, resaltando la jerarquía de objetos y arreglos. Esta herramienta valida la sintaxis y reporta errores precisos de parsing, ayudándote a depurar respuestas de servicios web de forma inmediata. Todo el procesamiento ocurre localmente en tu navegador mediante JavaScript nativo, sin enviar tus datos a ningún servidor externo, preservando la privacidad de información potencialmente sensible. Además del formateo, puedes copiar el resultado o colapsar secciones. Es una solución gratuita, rápida y confiable para limpiar y verificar tus estructuras de datos JSON.",
+  "ads_layout": "standard"
+}

@@ -1,0 +1,26 @@
+---
+interface Props {
+  h1: string;
+  texto_seo: string;
+  slug: string;
+}
+const { h1, texto_seo, slug } = Astro.props;
+import { getCollection } from 'astro:content';
+import Layout from './Layout.astro';
+const tools = (await getCollection('tools')).map(t => ({ slug: t.data.slug, h1: t.data.h1 }));
+const current = tools.find(t => t.slug === slug);
+---
+<Layout titulo_seo={current?.h1} meta_descripcion={texto_seo.slice(0,160)}>
+  <h1>{h1}</h1>
+  <article class="seo-text">
+    <Fragment set:html={texto_seo} />
+  </article>
+  <section class="tool-island" data-component={current?.component} data-slug={slug}>
+    <slot name="tool" />
+  </section>
+</Layout>
+
+<style>
+  .seo-text { max-width: 720px; color: #cbd5e1; line-height: 1.7; font-size: 16px; }
+  .tool-island { margin: 30px 0; }
+</style>

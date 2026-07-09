@@ -1,0 +1,36 @@
+---
+import '../styles/global.css';
+interface Props {
+  titulo_seo?: string;
+  meta_descripcion?: string;
+}
+const {
+  titulo_seo = 'MultiTools — Herramientas gratuitas para desarrolladores',
+  meta_descripcion = 'Colección de micro-herramientas online gratuitas para desarrolladores. Rápidas, privadas y sin envíos a servidor.',
+} = Astro.props;
+---
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{titulo_seo}</title>
+    <meta name="description" content={meta_descripcion} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <slot name="head" />
+  </head>
+  <body>
+    <header class="site-header">
+      <a href="/" class="brand">MultiTools</a>
+      <nav>
+        <a href="/herramientas">Herramientas</a>
+      </nav>
+    </header>
+    <main class="site-main">
+      <slot />
+    </main>
+    <footer class="site-footer">
+      <p>MultiTools — herramientas gratuitas, privadas y sin servidor. Procesado 100% en tu navegador.</p>
+    </footer>
+  </body>
+</html>
