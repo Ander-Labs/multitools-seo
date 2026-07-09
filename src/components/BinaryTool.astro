@@ -1,0 +1,24 @@
+---
+const { } = Astro.props;
+---
+<div class="tool-box" id="box-BinaryTool">
+  <label>Texto / Binario
+    <textarea id="input" rows="5" placeholder="Hola"></textarea>
+  </label>
+  <button id="enc">A binario</button>
+  <button id="dec">A texto</button>
+  <label style="margin-top:12px; display:block;">Resultado
+    <textarea id="output" rows="5" readonly></textarea>
+  </label>
+</div>
+<script>
+const box = document.currentScript?.parentElement || document.getElementById('box-BinaryTool');
+if (box) {
+  const input = box.querySelector('#input'); const output = box.querySelector('#output');
+  const enc = box.querySelector('#enc'); const dec = box.querySelector('#dec');
+  const toBin = s => s.split('').map(c => c.charCodeAt(0).toString(2).padStart(8,'0')).join(' ');
+  const toTxt = s => s.trim().split(/\s+/).map(b => String.fromCharCode(parseInt(b,2))).join('');
+  enc?.addEventListener('click', () => { try { output.value = toBin(input.value); } catch { output.value='Error'; } });
+  dec?.addEventListener('click', () => { try { output.value = toTxt(input.value); } catch { output.value='Error: binario inválido'; } });
+}
+</script>

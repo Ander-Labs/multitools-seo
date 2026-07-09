@@ -1,0 +1,23 @@
+---
+const { } = Astro.props;
+---
+<div class="tool-box" id="box-CameraTool">
+  <button id="start">Iniciar cámara</button>
+  <button id="shot">Capturar foto</button>
+  <p id="err" style="color:#f87171;margin-top:8px;"></p>
+  <video id="video" playsinline style="max-width:100%;margin-top:12px;border-radius:8px;display:block;"></video>
+  <canvas id="canvas" style="display:none;"></canvas>
+  <img id="photo" alt="foto" style="display:none;margin-top:12px;max-width:100%;border-radius:8px;" />
+</div>
+<script>
+const box = document.currentScript?.parentElement || document.getElementById('box-CameraTool');
+if (box) {
+  const video = box.querySelector('#video'); const shot = box.querySelector('#shot'); const canvas = box.querySelector('#canvas'); const start = box.querySelector('#start'); const photo = box.querySelector('#photo');
+  let stream;
+  start?.addEventListener('click', async () => {
+    try { stream = await navigator.mediaDevices.getUserMedia({ video:true }); video.srcObject = stream; await video.play(); }
+    catch(e){ box.querySelector('#err').textContent='No se pudo acceder a la cámara'; }
+  });
+  shot?.addEventListener('click', () => { canvas.width = video.videoWidth; canvas.height = video.videoHeight; canvas.getContext('2d').drawImage(video,0,0); photo.src = canvas.toDataURL('image/png'); photo.style.display='block'; });
+}
+</script>

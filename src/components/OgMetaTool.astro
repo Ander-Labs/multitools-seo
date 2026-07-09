@@ -1,0 +1,38 @@
+---
+const { } = Astro.props;
+---
+<div class="tool-box" id="box-OgMetaTool">
+  <label>Título
+    <input id="title" type="text" placeholder="Mi página" />
+  </label>
+  <label>Descripción
+    <input id="desc" type="text" placeholder="Descripción corta" />
+  </label>
+  <label>Imagen (URL)
+    <input id="image" type="text" placeholder="https://.../img.png" />
+  </label>
+  <label>URL
+    <input id="url" type="text" placeholder="https://example.com" />
+  </label>
+  <label>Tipo
+    <input id="type" type="text" placeholder="website" />
+  </label>
+  <button id="run">Generar meta tags</button>
+  <label style="margin-top:12px; display:block;">Resultado
+    <textarea id="out" rows="6" readonly></textarea>
+  </label>
+</div>
+<script>
+const box = document.currentScript?.parentElement || document.getElementById('box-OgMetaTool');
+if (box) {
+  const f = id => box.querySelector('#'+id).value.trim();
+  const out = box.querySelector('#out'); const btn = box.querySelector('#run');
+  btn?.addEventListener('click', () => {
+    const tags = [
+      ['og:title', f('title')], ['og:description', f('desc')], ['og:image', f('image')],
+      ['og:url', f('url')], ['og:type', f('type')||'website'], ['twitter:card', 'summary_large_image']
+    ].filter(([,v]) => v);
+    out.value = tags.map(([k,v]) => '<meta property="'+k+'" content="'+v.replace(/"/g,'&quot;')+'" />').join('\n');
+  });
+}
+</script>

@@ -1,0 +1,9 @@
+{
+  "slug": "expansor-rango-ipv4",
+  "component": "Ipv4RangeTool",
+  "titulo_seo": "Expansor de Rango IPv4 Online Gratis",
+  "meta_descripcion": "Calcula la subred CIDR de un rango IPv4 al instante en tu navegador. Gratis y privado.",
+  "h1": "Expansor de Rango IPv4",
+  "texto_seo": "El expansor de rango IPv4 toma una IP inicial y final y calcula la subred CIDR válida que las contiene. Práctico para definir reglas de acceso o agrupar direcciones en una sola notación. Introduce inicio y fin y obtén la CIDR resultante. Esta utilidad se ejecuta íntegramente en tu navegador mediante JavaScript moderno, sin enviar ningún dato a un servidor, lo que garantiza privacidad total y respuestas instantáneas. Es gratuita, no requiere registro y funciona en cualquier dispositivo con un navegador actual. Úsala para ahorrar tiempo en tareas repetitivas, depurar información, validar entradas o aprender cómo funcionan los formatos y estándares implicados. El código es ligero y el procesamiento ocurre de forma local, ideal para desarrolladores, administradores de sistemas y cualquier persona que trabaje con datos diariamente.",
+  "ads_layout": "standard"
+}

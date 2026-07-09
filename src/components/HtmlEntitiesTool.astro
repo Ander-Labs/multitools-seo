@@ -1,0 +1,24 @@
+---
+const { } = Astro.props;
+---
+<div class="tool-box" id="box-HtmlEntitiesTool">
+  <label>Texto / HTML
+    <textarea id="input" rows="5" placeholder="<div>&quot;hola&quot;</div>"></textarea>
+  </label>
+  <button id="enc">Escapar</button>
+  <button id="dec">Desescapar</button>
+  <label style="margin-top:12px; display:block;">Resultado
+    <textarea id="output" rows="5" readonly></textarea>
+  </label>
+</div>
+<script>
+const box = document.currentScript?.parentElement || document.getElementById('box-HtmlEntitiesTool');
+if (box) {
+  const input = box.querySelector('#input'); const output = box.querySelector('#output');
+  const enc = box.querySelector('#enc'); const dec = box.querySelector('#dec');
+  const esc = s => s.replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  const un = s => s.replace(/&amp;|&lt;|&gt;|&quot;|&#39;|&#x27;|&apos;/g, m => ({'&amp;':'&','&lt;':'<','&gt;':'>','&quot;':'"','&#39;':"'",'&#x27;':"'",'&apos;':"'"}[m]));
+  enc?.addEventListener('click', () => { output.value = esc(input.value); });
+  dec?.addEventListener('click', () => { output.value = un(input.value); });
+}
+</script>

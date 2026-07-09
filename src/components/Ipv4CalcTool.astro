@@ -1,0 +1,30 @@
+---
+const { } = Astro.props;
+---
+<div class="tool-box" id="box-Ipv4CalcTool">
+  <label>IPv4 CIDR
+    <input id="input" type="text" placeholder="192.168.1.0/24" />
+  </label>
+  <button id="run">Calcular</button>
+  <p id="err" style="color:#f87171;margin-top:8px;"></p>
+  <div id="out" style="margin-top:12px;"></div>
+</div>
+<script>
+const box = document.currentScript?.parentElement || document.getElementById('box-Ipv4CalcTool');
+if (box) {
+  const input = box.querySelector('#input'); const out = box.querySelector('#out'); const btn = box.querySelector('#run'); const err = box.querySelector('#err');
+  const ip2int = s => s.split('.').reduce((a,o)=>a*256+parseInt(o),0)>>>0;
+  const int2ip = n => [24,16,8,0].map(s => (n>>s)&255).join('.');
+  btn?.addEventListener('click', () => {
+    try {
+      const [ip,c] = input.value.trim().split('/'); const bits = parseInt(c);
+      const mask = bits>=0 && bits<=32 ? (bits===0?0:(0xffffffff<<(32-bits))>>>0) : NaN;
+      if (isNaN(mask)) throw new Error('máscara inválida');
+      const net = ip2int(ip) & mask; const wild = ~mask>>>0; const bc = net | wild;
+      const hosts = (wild>1) ? (wild-1) : 0;
+      const rows = [['Red', int2ip(net)],['Máscara', int2ip(mask)],['Broadcast', int2ip(bc)],['Rango', int2ip(net+1)+' - '+int2ip(bc-(bc>net?1:0))],['Hosts', hosts]];
+      out.innerHTML = '<table class="res-table">'+rows.map(([k,v])=>'<tr><th>'+k+'</th><td>'+v+'</td></tr>').join('')+'</table>'; err.textContent='';
+    } catch (e) { err.textContent='Error: '+e.message; }
+  });
+}
+</script>

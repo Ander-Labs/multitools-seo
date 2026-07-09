@@ -1,0 +1,20 @@
+---
+const { } = Astro.props;
+---
+<div class="tool-box" id="box-JsonMinifyTool">
+  <label>JSON
+    <textarea id="input" rows="6" placeholder='{ "a": 1 }'></textarea>
+  </label>
+  <button id="run">Minificar</button>
+  <p id="err" style="color:#f87171;margin-top:8px;"></p>
+  <label style="margin-top:12px; display:block;">Resultado
+    <textarea id="output" rows="6" readonly></textarea>
+  </label>
+</div>
+<script>
+const box = document.currentScript?.parentElement || document.getElementById('box-JsonMinifyTool');
+if (box) {
+  const input = box.querySelector('#input'); const output = box.querySelector('#output'); const btn = box.querySelector('#run'); const err = box.querySelector('#err');
+  btn?.addEventListener('click', () => { try { output.value = JSON.stringify(JSON.parse(input.value)); err.textContent=''; } catch(e){ err.textContent='Error: '+e.message; } });
+}
+</script>

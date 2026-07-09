@@ -1,0 +1,9 @@
+{
+  "slug": "evaluador-matematico",
+  "component": "MathTool",
+  "titulo_seo": "Evaluador de Expresiones Matemáticas Online Gratis",
+  "meta_descripcion": "Evalúa expresiones matemáticas al instante en tu navegador. Gratis y privado.",
+  "h1": "Evaluador Matemático",
+  "texto_seo": "El evaluador matemático calcula el resultado de expresiones con operaciones, paréntesis y funciones como sqrt, cos o abs. Es una calculadora de propósito general útil para scripting, finanzas o ciencia rápida. Escribe tu expresión y obtén el resultado de inmediato, con manejo de errores. Esta utilidad se ejecuta íntegramente en tu navegador mediante JavaScript moderno, sin enviar ningún dato a un servidor, lo que garantiza privacidad total y respuestas instantáneas. Es gratuita, no requiere registro y funciona en cualquier dispositivo con un navegador actual. Úsala para ahorrar tiempo en tareas repetitivas, depurar información, validar entradas o aprender cómo funcionan los formatos y estándares implicados. El código es ligero y el procesamiento ocurre de forma local, ideal para desarrolladores, administradores de sistemas y cualquier persona que trabaje con datos diariamente.",
+  "ads_layout": "standard"
+}

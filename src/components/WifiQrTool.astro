@@ -1,0 +1,28 @@
+---
+const { } = Astro.props;
+---
+<div class="tool-box" id="box-WifiQrTool">
+  <label>SSID
+    <input id="ssid" type="text" placeholder="MiWiFi" />
+  </label>
+  <label>Contraseña
+    <input id="pass" type="text" placeholder="contraseña" />
+  </label>
+  <label>Cifrado
+    <select id="enc"><option value="WPA">WPA/WPA2</option><option value="WEP">WEP</option><option value="nopass">Abierta</option></select>
+  </label>
+  <button id="run">Generar QR WiFi</button>
+  <p id="err" style="color:#f87171;margin-top:8px;"></p>
+  <img id="img" alt="QR" style="display:none;margin-top:12px;max-width:220px;" />
+</div>
+<script>
+import QRCode from 'qrcode';
+const box = document.currentScript?.parentElement || document.getElementById('box-WifiQrTool');
+if (box) {
+  const ssid = box.querySelector('#ssid'); const pass = box.querySelector('#pass'); const enc = box.querySelector('#enc'); const img = box.querySelector('#img'); const btn = box.querySelector('#run'); const err = box.querySelector('#err');
+  btn?.addEventListener('click', () => {
+    const payload = 'WIFI:S:'+JSON.stringify(ssid.value).slice(1,-1).replace(/;/g,'\\;')+';T:'+enc.value+';P:'+JSON.stringify(pass.value).slice(1,-1).replace(/;/g,'\\;')+';H:;';
+    QRCode.toDataURL(payload, { errorCorrectionLevel:'M' }).then(u => { img.src=u; img.style.display='block'; err.textContent=''; }).catch(e => err.textContent='Error: '+e.message);
+  });
+}
+</script>

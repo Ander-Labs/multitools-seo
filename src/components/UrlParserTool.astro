@@ -1,0 +1,23 @@
+---
+const { } = Astro.props;
+---
+<div class="tool-box" id="box-UrlParserTool">
+  <label>URL
+    <input id="input" type="text" placeholder="https://user:pass@example.com:8080/ruta?q=1#sec" />
+  </label>
+  <button id="run">Analizar</button>
+  <div id="out" style="margin-top:12px;"></div>
+</div>
+<script>
+const box = document.currentScript?.parentElement || document.getElementById('box-UrlParserTool');
+if (box) {
+  const input = box.querySelector('#input'); const out = box.querySelector('#out'); const btn = box.querySelector('#run');
+  btn?.addEventListener('click', () => {
+    try {
+      const u = new URL(input.value.trim());
+      const rows = [['Protocolo', u.protocol],['Host', u.host],['Hostname', u.hostname],['Puerto', u.port||'(defecto)'],['Ruta', u.pathname],['Consulta', u.search],['Fragmento', u.hash],['Usuario', u.username],['Origen', u.origin]];
+      out.innerHTML = '<table class="res-table">' + rows.map(([k,v]) => '<tr><th>'+k+'</th><td>'+v.replace(/</g,'&lt;')+'</td></tr>').join('') + '</table>';
+    } catch (e) { out.innerHTML = '<p style="color:#f87171">URL inválida</p>'; }
+  });
+}
+</script>

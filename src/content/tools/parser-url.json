@@ -1,0 +1,9 @@
+{
+  "slug": "parser-url",
+  "component": "UrlParserTool",
+  "titulo_seo": "Analizador de URL Online Gratis",
+  "meta_descripcion": "Descompone una URL en sus partes al instante en tu navegador. Gratis y privado.",
+  "h1": "Analizador de URL",
+  "texto_seo": "El analizador de URL descompone cualquier enlace en protocolo, host, puerto, ruta, consulta y fragmento. Resulta muy útil para depurar redirecciones, parámetros de tracking o construir URLs dinámicamente. Pega una URL y obtén cada componente desglosado en una tabla clara y copiable. Esta utilidad se ejecuta íntegramente en tu navegador mediante JavaScript moderno, sin enviar ningún dato a un servidor, lo que garantiza privacidad total y respuestas instantáneas. Es gratuita, no requiere registro y funciona en cualquier dispositivo con un navegador actual. Úsala para ahorrar tiempo en tareas repetitivas, depurar información, validar entradas o aprender cómo funcionan los formatos y estándares implicados. El código es ligero y el procesamiento ocurre de forma local, ideal para desarrolladores, administradores de sistemas y cualquier persona que trabaje con datos diariamente.",
+  "ads_layout": "standard"
+}

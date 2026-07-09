@@ -1,0 +1,29 @@
+---
+const { } = Astro.props;
+---
+<div class="tool-box" id="box-QrTool">
+  <label>Texto o URL
+    <textarea id="text" rows="3" placeholder="https://example.com"></textarea>
+  </label>
+  <label>Color frente
+    <input id="fg" type="color" value="#000000" />
+  </label>
+  <label>Color fondo
+    <input id="bg" type="color" value="#ffffff" />
+  </label>
+  <button id="run">Generar QR</button>
+  <p id="err" style="color:#f87171;margin-top:8px;"></p>
+  <img id="img" alt="QR" style="display:none;margin-top:12px;max-width:220px;" />
+</div>
+<script>
+import QRCode from 'qrcode';
+const box = document.currentScript?.parentElement || document.getElementById('box-QrTool');
+if (box) {
+  const text = box.querySelector('#text'); const fg = box.querySelector('#fg'); const bg = box.querySelector('#bg'); const img = box.querySelector('#img'); const btn = box.querySelector('#run'); const err = box.querySelector('#err');
+  btn?.addEventListener('click', () => {
+    QRCode.toDataURL(text.value || ' ', { errorCorrectionLevel:'M', color:{ dark:fg.value, light:bg.value } })
+      .then(u => { img.src = u; img.style.display='block'; err.textContent=''; })
+      .catch(e => err.textContent = 'Error: ' + e.message);
+  });
+}
+</script>

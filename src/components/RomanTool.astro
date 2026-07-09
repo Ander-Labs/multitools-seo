@@ -1,0 +1,24 @@
+---
+const { } = Astro.props;
+---
+<div class="tool-box" id="box-RomanTool">
+  <label>Número o romano
+    <input id="val" type="text" placeholder="2024 o MMXXIV" />
+  </label>
+  <button id="run">Convertir</button>
+  <p id="out" style="margin-top:12px;color:#7dd3fc;"></p>
+</div>
+<script>
+const box = document.currentScript?.parentElement || document.getElementById('box-RomanTool');
+if (box) {
+  const val = box.querySelector('#val'); const out = box.querySelector('#out'); const btn = box.querySelector('#run');
+  const toRom = n => { const m=[[1000,'M'],[900,'CM'],[500,'D'],[400,'CD'],[100,'C'],[90,'XC'],[50,'L'],[40,'XL'],[10,'X'],[9,'IX'],[5,'V'],[4,'IV'],[1,'I']]; let r=''; for(const [v,s] of m){ while(n>=v){ r+=s; n-=v; } } return r; };
+  const fromRom = s => { const m={I:1,V:5,X:10,L:50,C:100,D:500,M:1000}; let t=0,p=0; for(let i=s.length-1;i>=0;i--){ const v=m[s[i]]; if(v<p) t-=v; else t+=v; p=v; } return t; };
+  btn?.addEventListener('click', () => {
+    const v = val.value.trim().toUpperCase();
+    if (/^[IVXLCDM]+$/.test(v)) out.textContent = String(fromRom(v));
+    else if (/^\d+$/.test(v)) out.textContent = toRom(parseInt(v));
+    else out.textContent = 'Entrada inválida';
+  });
+}
+</script>

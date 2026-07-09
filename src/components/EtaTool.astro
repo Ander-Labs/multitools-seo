@@ -1,0 +1,29 @@
+---
+const { } = Astro.props;
+---
+<div class="tool-box" id="box-EtaTool">
+  <label>Procesado
+    <input id="done" type="number" placeholder="300" />
+  </label>
+  <label>Total
+    <input id="total" type="number" placeholder="1000" />
+  </label>
+  <label>Velocidad (unidades/seg)
+    <input id="rate" type="number" placeholder="10" />
+  </label>
+  <button id="run">Calcular ETA</button>
+  <p id="out" style="margin-top:12px;color:#7dd3fc;"></p>
+</div>
+<script>
+const box = document.currentScript?.parentElement || document.getElementById('box-EtaTool');
+if (box) {
+  const done = box.querySelector('#done'); const total = box.querySelector('#total'); const rate = box.querySelector('#rate'); const out = box.querySelector('#out'); const btn = box.querySelector('#run');
+  btn?.addEventListener('click', () => {
+    const d=parseFloat(done.value), t=parseFloat(total.value), r=parseFloat(rate.value);
+    if (!(r>0) || t<=d) { out.textContent='Datos inválidos'; return; }
+    const secs = (t - d) / r;
+    const end = new Date(Date.now() + secs*1000);
+    out.innerHTML = 'Restante: '+secs.toFixed(1)+' s<br>Fin estimado: '+end.toLocaleTimeString();
+  });
+}
+</script>

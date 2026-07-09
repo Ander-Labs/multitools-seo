@@ -1,0 +1,35 @@
+---
+const { } = Astro.props;
+---
+<div class="tool-box" id="box-PercentageTool">
+  <label>Modo
+    <select id="mode">
+      <option value="of">X % de Y</option>
+      <option value="is">X es qué % de Y</option>
+      <option value="disc">Y con descuento X %</option>
+    </select>
+  </label>
+  <label>Valor A
+    <input id="a" type="number" placeholder="20" />
+  </label>
+  <label>Valor B
+    <input id="b" type="number" placeholder="100" />
+  </label>
+  <button id="run">Calcular</button>
+  <p id="out" style="margin-top:12px;color:#7dd3fc;"></p>
+</div>
+<script>
+const box = document.currentScript?.parentElement || document.getElementById('box-PercentageTool');
+if (box) {
+  const mode = box.querySelector('#mode'); const a = box.querySelector('#a'); const b = box.querySelector('#b'); const out = box.querySelector('#out'); const btn = box.querySelector('#run');
+  btn?.addEventListener('click', () => {
+    const x = parseFloat(a.value); const y = parseFloat(b.value);
+    let r;
+    if (mode.value==='of') r = (x/100)*y;
+    else if (mode.value==='is') r = y===0?NaN:(x/y*100);
+    else r = y - y*(x/100); // discount
+    if (!isFinite(r) || isNaN(r)) { out.textContent = 'Valores inválidos'; return; }
+    out.textContent = 'Resultado: ' + r;
+  });
+}
+</script>

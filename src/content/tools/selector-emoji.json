@@ -1,0 +1,9 @@
+{
+  "slug": "selector-emoji",
+  "component": "EmojiTool",
+  "titulo_seo": "Selector de Emoji Online Gratis",
+  "meta_descripcion": "Busca y copia emojis al instante en tu navegador. Gratis y privado.",
+  "h1": "Selector de Emoji",
+  "texto_seo": "El selector de emoji muestra una colección de emojis comunes con su punto de código Unicode. Haz clic en cualquiera para copiarlo y conocer su representación técnica. Todo funciona localmente y es útil para mensajes y documentación. Esta utilidad se ejecuta íntegramente en tu navegador mediante JavaScript moderno, sin enviar ningún dato a un servidor, lo que garantiza privacidad total y respuestas instantáneas. Es gratuita, no requiere registro y funciona en cualquier dispositivo con un navegador actual. Úsala para ahorrar tiempo en tareas repetitivas, depurar información, validar entradas o aprender cómo funcionan los formatos y estándares implicados. El código es ligero y el procesamiento ocurre de forma local, ideal para desarrolladores, administradores de sistemas y cualquier persona que trabaje con datos diariamente.",
+  "ads_layout": "standard"
+}

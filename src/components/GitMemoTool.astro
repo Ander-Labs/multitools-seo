@@ -1,0 +1,28 @@
+---
+const { } = Astro.props;
+---
+<div class="tool-box" id="box-GitMemoTool">
+  <div id="out"></div>
+</div>
+<script>
+const box = document.currentScript?.parentElement || document.getElementById('box-GitMemoTool');
+if (box) {
+  const rows = [
+    ['Iniciar repo', 'git init'],
+    ['Clonar', 'git clone <url>'],
+    ['Estado', 'git status'],
+    ['Añadir', 'git add <archivo>'],
+    ['Commit', 'git commit -m "mensaje"'],
+    ['Ramas', 'git branch -a'],
+    ['Cambiar rama', 'git checkout <rama>'],
+    ['Fusionar', 'git merge <rama>'],
+    ['Traer', 'git pull'],
+    ['Enviar', 'git push'],
+    ['Ver historial', 'git log --oneline'],
+    ['Stash', 'git stash'],
+    ['Rebase', 'git rebase <rama>'],
+    ['Diff', 'git diff'],
+  ];
+  box.querySelector('#out').innerHTML = '<table class="res-table">'+rows.map(([d,c])=>'<tr><th>'+d+'</th><td><code>'+c+'</code></td></tr>').join('')+'</table>';
+}
+</script>

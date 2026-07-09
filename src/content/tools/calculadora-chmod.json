@@ -1,0 +1,9 @@
+{
+  "slug": "calculadora-chmod",
+  "component": "ChmodTool",
+  "titulo_seo": "Calculadora de Chmod Online Gratis",
+  "meta_descripcion": "Calcula permisos chmod al instante en tu navegador. Gratis y privado.",
+  "h1": "Calculadora de Chmod",
+  "texto_seo": "La calculadora de chmod convierte entre notación octal (755) y simbólica (rwxr-xr-x). Esencial para administrar permisos de archivos en sistemas Unix y Linux. Marca las casillas por usuario, grupo y otros para ver el comando resultante. Esta utilidad se ejecuta íntegramente en tu navegador mediante JavaScript moderno, sin enviar ningún dato a un servidor, lo que garantiza privacidad total y respuestas instantáneas. Es gratuita, no requiere registro y funciona en cualquier dispositivo con un navegador actual. Úsala para ahorrar tiempo en tareas repetitivas, depurar información, validar entradas o aprender cómo funcionan los formatos y estándares implicados. El código es ligero y el procesamiento ocurre de forma local, ideal para desarrolladores, administradores de sistemas y cualquier persona que trabaje con datos diariamente.",
+  "ads_layout": "standard"
+}

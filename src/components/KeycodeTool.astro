@@ -1,0 +1,18 @@
+---
+const { } = Astro.props;
+---
+<div class="tool-box" id="box-KeycodeTool">
+  <p>Pulsa una tecla:</p>
+  <input id="area" type="text" placeholder="Haz clic aquí y pulsa una tecla" style="width:100%;" />
+  <div id="out" style="margin-top:12px;"></div>
+</div>
+<script>
+const box = document.currentScript?.parentElement || document.getElementById('box-KeycodeTool');
+if (box) {
+  const area = box.querySelector('#area'); const out = box.querySelector('#out');
+  area?.addEventListener('keydown', e => {
+    e.preventDefault();
+    out.innerHTML = '<table class="res-table"><tr><th>key</th><td>'+e.key+'</td></tr><tr><th>code</th><td>'+e.code+'</td></tr><tr><th>keyCode</th><td>'+e.keyCode+'</td></tr><tr><th>shiftKey</th><td>'+e.shiftKey+'</td></tr><tr><th>ctrlKey</th><td>'+e.ctrlKey+'</td></tr><tr><th>altKey</th><td>'+e.altKey+'</td></tr><tr><th>metaKey</th><td>'+e.metaKey+'</td></tr></table>';
+  });
+}
+</script>

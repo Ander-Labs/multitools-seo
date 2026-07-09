@@ -1,0 +1,28 @@
+---
+const { } = Astro.props;
+---
+<div class="tool-box" id="box-PdfSigTool">
+  <label>Archivo PDF
+    <input id="file" type="file" accept="application/pdf" />
+  </label>
+  <button id="run">Inspeccionar</button>
+  <p id="err" style="color:#f87171;margin-top:8px;"></p>
+  <p id="out" style="margin-top:12px;color:#7dd3fc;"></p>
+</div>
+<script>
+const box = document.currentScript?.parentElement || document.getElementById('box-PdfSigTool');
+if (box) {
+  const file = box.querySelector('#file'); const out = box.querySelector('#out'); const btn = box.querySelector('#run'); const err = box.querySelector('#err');
+  btn?.addEventListener('click', () => {
+    const f = file.files[0]; if (!f) { err.textContent='Elige un PDF'; return; }
+    const fr = new FileReader();
+    fr.onload = () => {
+      const txt = new TextDecoder().decode(fr.result);
+      const count = (txt.match(/\/Sig\b/g) || []).length;
+      out.textContent = 'Firmas detectadas en la estructura: ' + count;
+      err.textContent='';
+    };
+    fr.readAsArrayBuffer(f);
+  });
+}
+</script>

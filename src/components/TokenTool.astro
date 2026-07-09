@@ -1,0 +1,36 @@
+---
+const { } = Astro.props;
+---
+<div class="tool-box" id="box-TokenTool">
+  <label>Longitud
+    <input id="len" type="number" value="16" min="1" max="128" />
+  </label>
+  <div style="display:flex;gap:16px;flex-wrap:wrap;margin:8px 0;">
+    <label><input id="lower" type="checkbox" checked /> Minúsculas</label>
+    <label><input id="upper" type="checkbox" checked /> Mayúsculas</label>
+    <label><input id="num" type="checkbox" checked /> Números</label>
+    <label><input id="sym" type="checkbox" /> Símbolos</label>
+  </div>
+  <button id="run">Generar token</button>
+  <label style="margin-top:12px; display:block;">Resultado
+    <textarea id="out" rows="2" readonly></textarea>
+  </label>
+</div>
+<script>
+const box = document.currentScript?.parentElement || document.getElementById('box-TokenTool');
+if (box) {
+  const len = box.querySelector('#len'); const out = box.querySelector('#out'); const btn = box.querySelector('#run');
+  const lower = box.querySelector('#lower'); const upper = box.querySelector('#upper'); const num = box.querySelector('#num'); const sym = box.querySelector('#sym');
+  btn?.addEventListener('click', () => {
+    let chars = '';
+    if (lower.checked) chars+='abcdefghijklmnopqrstuvwxyz';
+    if (upper.checked) chars+='ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    if (num.checked) chars+='0123456789';
+    if (sym.checked) chars+='!@#$%^&*()_+-=';
+    if (!chars) { out.value='Selecciona un conjunto'; return; }
+    const n = Math.max(1, parseInt(len.value)||16);
+    const arr = new Uint32Array(n); crypto.getRandomValues(arr);
+    out.value = Array.from(arr, x => chars[x % chars.length]).join('');
+  });
+}
+</script>

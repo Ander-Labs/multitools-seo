@@ -1,0 +1,26 @@
+---
+const { } = Astro.props;
+---
+<div class="tool-box" id="box-PhoneTool">
+  <label>Número de teléfono
+    <input id="input" type="text" placeholder="+34123456789" />
+  </label>
+  <button id="run">Analizar</button>
+  <p id="err" style="color:#f87171;margin-top:8px;"></p>
+  <div id="out" style="margin-top:12px;"></div>
+</div>
+<script>
+import { parsePhoneNumberFromString, AsYouType } from 'libphonenumber-js';
+const box = document.currentScript?.parentElement || document.getElementById('box-PhoneTool');
+if (box) {
+  const input = box.querySelector('#input'); const out = box.querySelector('#out'); const btn = box.querySelector('#run'); const err = box.querySelector('#err');
+  btn?.addEventListener('click', () => {
+    try {
+      const p = parsePhoneNumberFromString(input.value);
+      if (!p || !p.isValid()) { err.textContent='Número inválido'; out.textContent=''; return; }
+      const rows = [['E.164', p.number],['Internacional', p.formatInternational()],['Nacional', p.formatNational()],['País', (p.country||'desconocido')],['Tipo', (p.getType()||'desconocido')]];
+      out.innerHTML = '<table class="res-table">'+rows.map(([k,v])=>'<tr><th>'+k+'</th><td>'+v+'</td></tr>').join('')+'</table>'; err.textContent='';
+    } catch (e) { err.textContent='Error: '+e.message; }
+  });
+}
+</script>

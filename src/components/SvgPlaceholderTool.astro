@@ -1,0 +1,28 @@
+---
+const { } = Astro.props;
+---
+<div class="tool-box" id="box-SvgPlaceholderTool">
+  <label>Ancho
+    <input id="w" type="number" value="300" />
+  </label>
+  <label>Alto
+    <input id="h" type="number" value="200" />
+  </label>
+  <label>Texto
+    <input id="txt" type="text" placeholder="placeholder" />
+  </label>
+  <button id="run">Generar SVG</button>
+  <label style="margin-top:12px; display:block;">SVG
+    <textarea id="out" rows="6" readonly></textarea>
+  </label>
+</div>
+<script>
+const box = document.currentScript?.parentElement || document.getElementById('box-SvgPlaceholderTool');
+if (box) {
+  const w = box.querySelector('#w'); const h = box.querySelector('#h'); const txt = box.querySelector('#txt'); const out = box.querySelector('#out'); const btn = box.querySelector('#run');
+  btn?.addEventListener('click', () => {
+    const svg = '<svg xmlns="http://www.w3.org/2000/svg" width="'+w.value+'" height="'+h.value+'" viewBox="0 0 '+w.value+' '+h.value+'"><rect width="100%" height="100%" fill="#1f2937"/><text x="50%" y="50%" fill="#9aa3b2" font-family="sans-serif" font-size="20" text-anchor="middle" dominant-baseline="middle">'+(txt.value||(w.value+'x'+h.value))+'</text></svg>';
+    out.value = svg;
+  });
+}
+</script>

@@ -1,0 +1,32 @@
+---
+const { } = Astro.props;
+---
+<div class="tool-box" id="box-JsonDiffTool">
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+    <label>JSON A
+      <textarea id="a" rows="8" placeholder='{"a":1}'></textarea>
+    </label>
+    <label>JSON B
+      <textarea id="b" rows="8" placeholder='{"a":2}'></textarea>
+    </label>
+  </div>
+  <button id="run">Comparar</button>
+  <p id="err" style="color:#f87171;margin-top:8px;"></p>
+  <div id="out" style="margin-top:12px;overflow:auto;"></div>
+</div>
+<script>
+const box = document.currentScript?.parentElement || document.getElementById('box-JsonDiffTool');
+if (box) {
+  const a = box.querySelector('#a'); const b = box.querySelector('#b'); const out = box.querySelector('#out'); const btn = box.querySelector('#run'); const err = box.querySelector('#err');
+  const flat = (o, p='') => Object.entries(o||{}).reduce((acc,[k,v]) => { const np = p? p+'.'+k : k; if (v && typeof v==='object') Object.assign(acc, flat(v, np)); else acc[np]=v; return acc; }, {});
+  btn?.addEventListener('click', () => {
+    try {
+      const fa = flat(JSON.parse(a.value)); const fb = flat(JSON.parse(b.value));
+      const keys = new Set([...Object.keys(fa), ...Object.keys(fb)]);
+      let html = '<table class="res-table"><tr><th>Clave</th><th>A</th><th>B</th></tr>';
+      keys.forEach(k => { if (fa[k]!==fb[k]) html += '<tr><td>'+k+'</td><td>'+JSON.stringify(fa[k]).replace(/</g,'&lt;')+'</td><td>'+JSON.stringify(fb[k]).replace(/</g,'&lt;')+'</td></tr>'; });
+      out.innerHTML = html + '</table>'; err.textContent='';
+    } catch (e) { err.textContent = 'Error: ' + e.message; }
+  });
+}
+</script>

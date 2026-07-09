@@ -1,0 +1,30 @@
+---
+const { } = Astro.props;
+---
+<div class="tool-box" id="box-AsciiDrawerTool">
+  <label>Texto
+    <input id="input" type="text" placeholder="MultiTools" />
+  </label>
+  <label>Fuente
+    <select id="font"></select>
+  </label>
+  <button id="run">Generar</button>
+  <p id="err" style="color:#f87171;margin-top:8px;"></p>
+  <label style="margin-top:12px; display:block;">Resultado
+    <textarea id="output" rows="8" readonly style="font-family:monospace;"></textarea>
+  </label>
+</div>
+<script>
+import figlet from 'figlet';
+const box = document.currentScript?.parentElement || document.getElementById('box-AsciiDrawerTool');
+if (box) {
+  const input = box.querySelector('#input'); const font = box.querySelector('#font'); const output = box.querySelector('#output'); const btn = box.querySelector('#run'); const err = box.querySelector('#err');
+  font.innerHTML = ['Standard','Big','Slant','Banner','Block','Bubble','Digital','Lean','Mini','Shadow','Small','Script','Jane','Larry 3D','Ghost'].map(f => '<option>'+f+'</option>').join('');
+  btn?.addEventListener('click', () => {
+    figlet.text(input.value, { font: font.value }, (e, d) => {
+      if (e) { err.textContent = 'Error: ' + e.message; return; }
+      err.textContent = ''; output.value = d;
+    });
+  });
+}
+</script>

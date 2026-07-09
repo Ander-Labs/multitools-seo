@@ -1,0 +1,26 @@
+---
+const { } = Astro.props;
+---
+<div class="tool-box" id="box-UlidTool">
+  <label>Cantidad
+    <input id="n" type="number" value="1" min="1" max="20" />
+  </label>
+  <button id="run">Generar ULID</button>
+  <label style="margin-top:12px; display:block;">Resultado
+    <textarea id="out" rows="4" readonly></textarea>
+  </label>
+</div>
+<script>
+const box = document.currentScript?.parentElement || document.getElementById('box-UlidTool');
+if (box) {
+  const out = box.querySelector('#out'); const btn = box.querySelector('#run'); const n = box.querySelector('#n');
+  const C = '0123456789ABCDEFGHJKMNPQRSTVWXYZ';
+  const enc = t => { let s=''; for (let i=0;i<10;i++){ s = C[t % 32] + s; t = Math.floor(t/32); } return s; };
+  const rnd = () => { const a = new Uint8Array(16); crypto.getRandomValues(a); let s=''; for (const x of a) s += C[x % 32]; return s; };
+  btn?.addEventListener('click', () => {
+    const count = Math.max(1, parseInt(n.value)||1);
+    const ids = []; for (let i=0;i<count;i++) ids.push(enc(Date.now()) + rnd().slice(0,16));
+    out.value = ids.join('\n');
+  });
+}
+</script>

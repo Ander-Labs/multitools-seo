@@ -1,0 +1,31 @@
+---
+const { } = Astro.props;
+---
+<div class="tool-box" id="box-BenchmarkTool">
+  <label>Expresión a medir
+    <input id="code" type="text" placeholder="Math.sqrt(12345)" />
+  </label>
+  <label>Iteraciones
+    <input id="it" type="number" value="100000" />
+  </label>
+  <button id="run">Medir</button>
+  <p id="err" style="color:#f87171;margin-top:8px;"></p>
+  <p id="out" style="margin-top:8px;color:#7dd3fc;"></p>
+</div>
+<script>
+const box = document.currentScript?.parentElement || document.getElementById('box-BenchmarkTool');
+if (box) {
+  const code = box.querySelector('#code'); const it = box.querySelector('#it'); const out = box.querySelector('#out'); const btn = box.querySelector('#run'); const err = box.querySelector('#err');
+  btn?.addEventListener('click', () => {
+    try {
+      const n = Math.max(1, parseInt(it.value)||1000);
+      const fn = new Function('return ('+code.value+')');
+      const t0 = performance.now();
+      for (let i=0;i<n;i++) fn();
+      const ms = performance.now()-t0;
+      out.textContent = n+' iteraciones en '+ms.toFixed(2)+' ms ('+(ms/n).toFixed(4)+' ms/op)';
+      err.textContent='';
+    } catch (e) { err.textContent = 'Error: ' + e.message; }
+  });
+}
+</script>

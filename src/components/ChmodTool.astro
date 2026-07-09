@@ -1,0 +1,28 @@
+---
+const { } = Astro.props;
+---
+<div class="tool-box" id="box-ChmodTool">
+  <table style="width:100%;border-collapse:collapse;">
+    <tr><th></th><th>Lectura</th><th>Escritura</th><th>Ejecución</th></tr>
+    <tr><th>Usuario</th><td><input type="checkbox" id="ur" checked></td><td><input type="checkbox" id="uw" checked></td><td><input type="checkbox" id="ux" checked></td></tr>
+    <tr><th>Grupo</th><td><input type="checkbox" id="gr" checked></td><td><input type="checkbox" id="gw"></td><td><input type="checkbox" id="gx" checked></td></tr>
+    <tr><th>Otros</th><td><input type="checkbox" id="or" checked></td><td><input type="checkbox" id="ow"></td><td><input type="checkbox" id="ox" checked></td></tr>
+  </table>
+  <div id="out" style="margin-top:12px;"></div>
+</div>
+<script>
+const box = document.currentScript?.parentElement || document.getElementById('box-ChmodTool');
+if (box) {
+  const out = box.querySelector('#out');
+  const cats = ['u','g','o']; const perms = ['r','w','x'];
+  const upd = () => {
+    const parts = cats.map(c => perms.map(p => box.querySelector('#'+c+p).checked ? p : '-').join(''));
+    const oct = cats.map(c => perms.reduce((a,p,i) => a + (box.querySelector('#'+c+p).checked ? [4,2,1][i] : 0), 0)).join('');
+    out.innerHTML = '<table class="res-table"><tr><th></th><th>Lectura</th><th>Escritura</th><th>Ejecución</th></tr>' +
+      cats.map((c,i) => '<tr><th>'+['Usuario','Grupo','Otros'][i]+'</th>'+perms.map(p => '<td>'+(box.querySelector('#'+c+p).checked?'✔':'✘')+'</td>').join('')+'</tr>').join('') +
+      '</table><p style="margin-top:10px;color:#7dd3fc">chmod '+oct+' ('+parts.join('')+')</p>';
+  };
+  box.querySelectorAll('input[type=checkbox]').forEach(c => c.addEventListener('change', upd));
+  upd();
+}
+</script>

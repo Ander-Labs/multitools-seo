@@ -1,0 +1,9 @@
+{
+  "slug": "docker-run-a-compose",
+  "component": "DockerTool",
+  "titulo_seo": "Conversor docker run a Compose Online Gratis",
+  "meta_descripcion": "Convierte comandos docker run a docker-compose al instante en tu navegador. Gratis y privado.",
+  "h1": "Docker Run a Docker Compose",
+  "texto_seo": "El conversor de docker run a docker-compose transforma un comando docker run en un servicio compose. Facilita pasar de comandos rápidos a archivos docker-compose.yml reutilizables. Pega tu docker run y obtén el fragmento de servicio equivalente. Esta utilidad se ejecuta íntegramente en tu navegador mediante JavaScript moderno, sin enviar ningún dato a un servidor, lo que garantiza privacidad total y respuestas instantáneas. Es gratuita, no requiere registro y funciona en cualquier dispositivo con un navegador actual. Úsala para ahorrar tiempo en tareas repetitivas, depurar información, validar entradas o aprender cómo funcionan los formatos y estándares implicados. El código es ligero y el procesamiento ocurre de forma local, ideal para desarrolladores, administradores de sistemas y cualquier persona que trabaje con datos diariamente.",
+  "ads_layout": "standard"
+}

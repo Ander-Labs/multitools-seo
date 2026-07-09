@@ -1,0 +1,21 @@
+---
+const { } = Astro.props;
+---
+<div class="tool-box" id="box-YamlFmtTool">
+  <label>YAML
+    <textarea id="input" rows="6" placeholder="a: 1&#10;b: {c: 2}"></textarea>
+  </label>
+  <button id="run">Formatear</button>
+  <p id="err" style="color:#f87171;margin-top:8px;"></p>
+  <label style="margin-top:12px; display:block;">Resultado
+    <textarea id="output" rows="6" readonly></textarea>
+  </label>
+</div>
+<script>
+import YAML from 'yaml';
+const box = document.currentScript?.parentElement || document.getElementById('box-YamlFmtTool');
+if (box) {
+  const input = box.querySelector('#input'); const output = box.querySelector('#output'); const btn = box.querySelector('#run'); const err = box.querySelector('#err');
+  btn?.addEventListener('click', () => { try { output.value = YAML.stringify(YAML.parse(input.value)); err.textContent=''; } catch(e){ err.textContent='Error: '+e.message; } });
+}
+</script>

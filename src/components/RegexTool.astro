@@ -1,0 +1,33 @@
+---
+const { } = Astro.props;
+---
+<div class="tool-box" id="box-RegexTool">
+  <label>Patrón
+    <input id="pat" type="text" placeholder="\d+" />
+  </label>
+  <label>Banderas (g, i, m)
+    <input id="flags" type="text" value="g" />
+  </label>
+  <label>Texto de prueba
+    <textarea id="txt" rows="5" placeholder="abc 123 def 456"></textarea>
+  </label>
+  <p id="err" style="color:#f87171;margin-top:8px;"></p>
+  <div id="out"></div>
+</div>
+<script>
+const box = document.currentScript?.parentElement || document.getElementById('box-RegexTool');
+if (box) {
+  const pat = box.querySelector('#pat'); const flags = box.querySelector('#flags'); const txt = box.querySelector('#txt'); const out = box.querySelector('#out'); const err = box.querySelector('#err');
+  const upd = () => {
+    try {
+      const re = new RegExp(pat.value, flags.value);
+      const m = txt.value.match(re);
+      err.textContent = '';
+      if (!m) { out.innerHTML = '<p style="color:#9aa3b2">Sin coincidencias</p>'; return; }
+      out.innerHTML = '<p style="color:#7dd3fc">'+m.length+' coincidencia(s)</p><ul style="color:#cbd5e1"></ul>';
+      const ul = out.querySelector('ul'); m.forEach(x => { const li = document.createElement('li'); li.textContent = x; ul.appendChild(li); });
+    } catch (e) { err.textContent = 'Regex inválida: ' + e.message; }
+  };
+  [pat, flags, txt].forEach(el => el?.addEventListener('input', upd)); upd();
+}
+</script>

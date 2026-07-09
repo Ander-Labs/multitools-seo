@@ -1,0 +1,29 @@
+---
+const { } = Astro.props;
+---
+<div class="tool-box" id="box-LoremTool">
+  <label>Número de párrafos
+    <input id="n" type="number" value="3" min="1" max="20" />
+  </label>
+  <button id="run">Generar</button>
+  <div id="out" style="margin-top:12px;color:#cbd5e1;"></div>
+</div>
+<script>
+const box = document.currentScript?.parentElement || document.getElementById('box-LoremTool');
+if (box) {
+  const n = box.querySelector('#n'); const out = box.querySelector('#out'); const btn = box.querySelector('#run');
+  const words = 'lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua enim ad minim veniam quis nostrud exercitation ullamco laboris nisi aliquip ex ea commodo consequat'.split(' ');
+  const cap = s => s.charAt(0).toUpperCase() + s.slice(1);
+  btn?.addEventListener('click', () => {
+    const count = Math.max(1, parseInt(n.value) || 3);
+    const paras = [];
+    for (let i=0;i<count;i++){
+      let sent = [];
+      const ns = 3 + Math.floor(Math.random()*4);
+      for (let j=0;j<ns;j++){ const wl=8+Math.floor(Math.random()*10); const w=[]; for(let k=0;k<wl;k++) w.push(words[Math.floor(Math.random()*words.length)]); sent.push(cap(w.join(' '))+'.'); }
+      paras.push('<p>'+sent.join(' ')+'</p>');
+    }
+    out.innerHTML = paras.join('');
+  });
+}
+</script>

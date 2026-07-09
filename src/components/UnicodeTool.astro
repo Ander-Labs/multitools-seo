@@ -1,0 +1,24 @@
+---
+const { } = Astro.props;
+---
+<div class="tool-box" id="box-UnicodeTool">
+  <label>Texto / Unicode
+    <textarea id="input" rows="5" placeholder="café"></textarea>
+  </label>
+  <button id="enc">A Unicode</button>
+  <button id="dec">A texto</button>
+  <label style="margin-top:12px; display:block;">Resultado
+    <textarea id="output" rows="5" readonly></textarea>
+  </label>
+</div>
+<script>
+const box = document.currentScript?.parentElement || document.getElementById('box-UnicodeTool');
+if (box) {
+  const input = box.querySelector('#input'); const output = box.querySelector('#output');
+  const enc = box.querySelector('#enc'); const dec = box.querySelector('#dec');
+  const toU = s => Array.from(s).map(c => '\\u' + c.codePointAt(0).toString(16).padStart(4,'0')).join('');
+  const toT = s => s.replace(/\\u([0-9a-fA-F]{4})/g, (_,h) => String.fromCodePoint(parseInt(h,16)));
+  enc?.addEventListener('click', () => { output.value = toU(input.value); });
+  dec?.addEventListener('click', () => { try { output.value = toT(input.value); } catch { output.value='Error'; } });
+}
+</script>

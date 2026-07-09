@@ -1,0 +1,27 @@
+---
+const { } = Astro.props;
+---
+<div class="tool-box" id="box-BaseConvTool">
+  <label>Valor
+    <input id="val" type="text" placeholder="FF" />
+  </label>
+  <label>Base origen
+    <input id="from" type="number" value="16" min="2" max="36" />
+  </label>
+  <label>Base destino
+    <input id="to" type="number" value="10" min="2" max="36" />
+  </label>
+  <button id="run">Convertir</button>
+  <p id="out" style="margin-top:12px;color:#7dd3fc;"></p>
+</div>
+<script>
+const box = document.currentScript?.parentElement || document.getElementById('box-BaseConvTool');
+if (box) {
+  const val = box.querySelector('#val'); const from = box.querySelector('#from'); const to = box.querySelector('#to'); const out = box.querySelector('#out'); const btn = box.querySelector('#run');
+  btn?.addEventListener('click', () => {
+    const dec = parseInt(val.value.trim(), parseInt(from.value));
+    if (isNaN(dec)) { out.textContent='Valor inválido para la base origen'; return; }
+    out.textContent = dec.toString(parseInt(to.value));
+  });
+}
+</script>

@@ -1,0 +1,9 @@
+{
+  "slug": "convertidor-ipv4",
+  "component": "Ipv4ConvTool",
+  "titulo_seo": "Convertidor de IPv4 Online Gratis",
+  "meta_descripcion": "Convierte IPv4 a decimal, binario y hexadecimal al instante en tu navegador. Gratis y privado.",
+  "h1": "Convertidor de Dirección IPv4",
+  "texto_seo": "El convertidor de dirección IPv4 representa una IP en formatos decimal, binario, hexadecimal e incluso IPv6 compatible. Útil para depurar reglas de firewall, subredes y sistemas que usan direcciones numéricas. Escribe una IPv4 y observa sus equivalentes en otras bases. Esta utilidad se ejecuta íntegramente en tu navegador mediante JavaScript moderno, sin enviar ningún dato a un servidor, lo que garantiza privacidad total y respuestas instantáneas. Es gratuita, no requiere registro y funciona en cualquier dispositivo con un navegador actual. Úsala para ahorrar tiempo en tareas repetitivas, depurar información, validar entradas o aprender cómo funcionan los formatos y estándares implicados. El código es ligero y el procesamiento ocurre de forma local, ideal para desarrolladores, administradores de sistemas y cualquier persona que trabaje con datos diariamente.",
+  "ads_layout": "standard"
+}

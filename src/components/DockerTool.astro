@@ -1,0 +1,38 @@
+---
+const { } = Astro.props;
+---
+<div class="tool-box" id="box-DockerTool">
+  <label>Comando docker run
+    <textarea id="input" rows="4" placeholder="docker run -d --name web -p 8080:80 -e PORT=80 nginx"></textarea>
+  </label>
+  <button id="run">Convertir a compose</button>
+  <p id="err" style="color:#f87171;margin-top:8px;"></p>
+  <label style="margin-top:12px; display:block;">docker-compose.yml
+    <textarea id="output" rows="8" readonly></textarea>
+  </label>
+</div>
+<script>
+const box = document.currentScript?.parentElement || document.getElementById('box-DockerTool');
+if (box) {
+  const input = box.querySelector('#input'); const output = box.querySelector('#output'); const btn = box.querySelector('#run'); const err = box.querySelector('#err');
+  btn?.addEventListener('click', () => {
+    try {
+      const parts = input.value.trim().replace(/^docker run\s+/, '').split(/\s+/);
+      let name='service', image='', ports=[], vols=[], env=[];
+      for (let i=0;i<parts.length;i++){
+        if (parts[i]==='-p'||parts[i]==='--publish') ports.push(parts[++i]);
+        else if (parts[i]==='-v'||parts[i]==='--volume') vols.push(parts[++i]);
+        else if (parts[i]==='-e'||parts[i]==='--env') env.push(parts[++i]);
+        else if (parts[i]==='--name') name=parts[++i];
+        else if (!parts[i].startsWith('-')) image=parts[i];
+      }
+      if (!image) throw new Error('no se detectó imagen');
+      let y = 'services:\n  '+name+':\n    image: '+image+'\n';
+      if (ports.length) y += '    ports:\n' + ports.map(p=>'      - "'+p+'"').join('\n') + '\n';
+      if (vols.length) y += '    volumes:\n' + vols.map(v=>'      - '+v).join('\n') + '\n';
+      if (env.length) y += '    environment:\n' + env.map(e=>'      - '+e).join('\n') + '\n';
+      output.value = y; err.textContent='';
+    } catch (e) { err.textContent = 'Error: ' + e.message; }
+  });
+}
+</script>

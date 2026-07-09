@@ -1,0 +1,26 @@
+---
+const { } = Astro.props;
+---
+<div class="tool-box" id="box-Ipv4ConvTool">
+  <label>IPv4
+    <input id="input" type="text" placeholder="192.168.1.1" />
+  </label>
+  <button id="run">Convertir</button>
+  <p id="err" style="color:#f87171;margin-top:8px;"></p>
+  <div id="out" style="margin-top:12px;"></div>
+</div>
+<script>
+const box = document.currentScript?.parentElement || document.getElementById('box-Ipv4ConvTool');
+if (box) {
+  const input = box.querySelector('#input'); const out = box.querySelector('#out'); const btn = box.querySelector('#run'); const err = box.querySelector('#err');
+  btn?.addEventListener('click', () => {
+    const p = input.value.trim().split('.');
+    if (p.length!==4 || p.some(x=>isNaN(x)||x<0||x>255)) { err.textContent='IPv4 inválida'; return; }
+    const dec = p.reduce((a,o)=>a*256+parseInt(o),0)>>>0;
+    const bin = p.map(o=>parseInt(o).toString(2).padStart(8,'0')).join('.');
+    const hex = p.map(o=>parseInt(o).toString(16).padStart(2,'0')).join('');
+    const rows = [['Decimal', dec],['Binario', bin],['Hexadecimal', '0x'+hex],['IPv6 (::ffff)', '::ffff:'+input.value.trim()]];
+    out.innerHTML = '<table class="res-table">'+rows.map(([k,v])=>'<tr><th>'+k+'</th><td>'+v+'</td></tr>').join('')+'</table>'; err.textContent='';
+  });
+}
+</script>

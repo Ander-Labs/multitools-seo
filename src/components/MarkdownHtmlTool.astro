@@ -1,0 +1,20 @@
+---
+const { } = Astro.props;
+---
+<div class="tool-box" id="box-MarkdownHtmlTool">
+  <label>Markdown
+    <textarea id="input" rows="8" placeholder="# Título&#10;Texto en **negrita**"></textarea>
+  </label>
+  <button id="run">Convertir a HTML</button>
+  <label style="margin-top:12px; display:block;">HTML
+    <textarea id="output" rows="8" readonly></textarea>
+  </label>
+</div>
+<script>
+import { marked } from 'marked';
+const box = document.currentScript?.parentElement || document.getElementById('box-MarkdownHtmlTool');
+if (box) {
+  const input = box.querySelector('#input'); const output = box.querySelector('#output'); const btn = box.querySelector('#run');
+  btn?.addEventListener('click', () => { output.value = marked.parse(input.value); });
+}
+</script>

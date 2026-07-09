@@ -1,0 +1,28 @@
+---
+const { } = Astro.props;
+---
+<div class="tool-box" id="box-MathTool">
+  <label>Expresión (usa sqrt, cos, abs, PI...)
+    <input id="input" type="text" placeholder="(2 + 3) * sqrt(16)" />
+  </label>
+  <button id="run">Calcular</button>
+  <label style="margin-top:12px; display:block;">Resultado
+    <textarea id="output" rows="2" readonly></textarea>
+  </label>
+</div>
+<script>
+const box = document.currentScript?.parentElement || document.getElementById('box-MathTool');
+if (box) {
+  const input = box.querySelector('#input'); const output = box.querySelector('#output'); const btn = box.querySelector('#run');
+  const safefn = ['sqrt','abs','ceil','floor','round','min','max','pow','sin','cos','tan','log','exp','PI','E'];
+  btn?.addEventListener('click', () => {
+    try {
+      const expr = input.value;
+      if (/[^0-9+\-*/().\s,sqrtabscelforiundmxpwtglEPI]/.test(expr)) throw new Error('caracteres no permitidos');
+      const fns = { sqrt:Math.sqrt, abs:Math.abs, ceil:Math.ceil, floor:Math.floor, round:Math.round, min:Math.min, max:Math.max, pow:Math.pow, sin:Math.sin, cos:Math.cos, tan:Math.tan, log:Math.log, exp:Math.exp, PI:Math.PI, E:Math.E };
+      const r = Function(...Object.keys(fns), 'return ('+expr+')')(...Object.values(fns));
+      output.value = String(r);
+    } catch (e) { output.value = 'Error: ' + e.message; }
+  });
+}
+</script>

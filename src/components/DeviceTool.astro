@@ -1,0 +1,25 @@
+---
+const { } = Astro.props;
+---
+<div class="tool-box" id="box-DeviceTool">
+  <p>Datos de tu dispositivo y navegador:</p>
+  <div id="out"></div>
+</div>
+<script>
+const box = document.currentScript?.parentElement || document.getElementById('box-DeviceTool');
+if (box) {
+  const out = box.querySelector('#out');
+  const rows = [
+    ['User Agent', navigator.userAgent],
+    ['Plataforma', navigator.platform || '(no disponible)'],
+    ['Idioma', navigator.language],
+    ['Ancho pantalla', screen.width + ' px'],
+    ['Alto pantalla', screen.height + ' px'],
+    ['Pixel ratio', window.devicePixelRatio],
+    ['Ancho viewport', document.documentElement.clientWidth + ' px'],
+    ['Alto viewport', document.documentElement.clientHeight + ' px'],
+    ['Touch', ('ontouchstart' in window) ? 'Sí' : 'No'],
+  ];
+  out.innerHTML = '<table class="res-table">' + rows.map(([k,v]) => '<tr><th>'+k+'</th><td>'+String(v).replace(/</g,'&lt;')+'</td></tr>').join('') + '</table>';
+}
+</script>

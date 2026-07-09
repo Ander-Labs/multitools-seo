@@ -1,0 +1,21 @@
+---
+const { } = Astro.props;
+---
+<div class="tool-box" id="box-MacLookupTool">
+  <label>Dirección MAC
+    <input id="input" type="text" placeholder="00:1a:2b:..." />
+  </label>
+  <button id="run">Buscar</button>
+  <p id="out" style="margin-top:12px;color:#7dd3fc;"></p>
+</div>
+<script>
+const box = document.currentScript?.parentElement || document.getElementById('box-MacLookupTool');
+if (box) {
+  const table = { '00:00:0c':'Cisco', '00:1a:2b':'Apple', '00:50:56':'VMware', '00:0c:29':'VMware', '3c:5a:b4':'Google', 'f4:06:69':'Apple', 'dc:a6:32':'Raspberry Pi', 'b8:27:eb':'Raspberry Pi', '00:1b:63':'Apple', 'ac:bc:32':'Huawei', 'd8:9c:67':'Samsung', '00:11:32':'Synology', '00:25:90':'Supermicro', '00:50:c2':'IEEE' };
+  const input = box.querySelector('#input'); const out = box.querySelector('#out'); const btn = box.querySelector('#run');
+  btn?.addEventListener('click', () => {
+    const mac = input.value.trim().toLowerCase(); const oui = mac.slice(0,8);
+    out.textContent = table[oui] ? 'Fabricante: ' + table[oui] : 'Prefijo no encontrado en la tabla local';
+  });
+}
+</script>

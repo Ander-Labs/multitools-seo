@@ -1,0 +1,21 @@
+---
+const { } = Astro.props;
+---
+<div class="tool-box" id="box-TextStatsTool">
+  <label>Texto
+    <textarea id="input" rows="5" placeholder="Escribe o pega tu texto..."></textarea>
+  </label>
+  <div id="out" style="margin-top:12px;"></div>
+</div>
+<script>
+const box = document.currentScript?.parentElement || document.getElementById('box-TextStatsTool');
+if (box) {
+  const input = box.querySelector('#input'); const out = box.querySelector('#out');
+  const upd = () => {
+    const t = input.value; const bytes = new TextEncoder().encode(t).length;
+    const rows = [['Caracteres', t.length],['Palabras', (t.trim() ? t.trim().split(/\s+/).length : 0)],['Líneas', t ? t.split('\n').length : 0],['Bytes (UTF-8)', bytes]];
+    out.innerHTML = '<table class="res-table">' + rows.map(([k,v]) => '<tr><th>'+k+'</th><td>'+v+'</td></tr>').join('') + '</table>';
+  };
+  input?.addEventListener('input', upd); upd();
+}
+</script>

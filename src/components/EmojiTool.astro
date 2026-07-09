@@ -1,0 +1,16 @@
+---
+const { } = Astro.props;
+---
+<div class="tool-box" id="box-EmojiTool">
+  <div id="out"></div>
+  <p id="copied" style="margin-top:10px;color:#7dd3fc;"></p>
+</div>
+<script>
+const box = document.currentScript?.parentElement || document.getElementById('box-EmojiTool');
+if (box) {
+  const emojis = ['😀','😂','😍','👍','🙏','🔥','🚀','💡','✅','❌','⭐','🌟','💻','📱','📝','🔧','⚙️','🐛','🎉','💰','🌍','⏰','📌','🔒','📊','🧠','🤝','👀','💬','❤️'];
+  const out = box.querySelector('#out');
+  out.innerHTML = emojis.map(e => '<button data-e="'+e+'" style="font-size:24px;margin:4px;background:#111827;border:1px solid rgba(255,255,255,.1);border-radius:8px;cursor:pointer;">'+e+'</button>').join('');
+  out.addEventListener('click', ev => { const b = ev.target.closest('button'); if (b) { navigator.clipboard?.writeText(b.dataset.e); const p = box.querySelector('#copied'); if(p) p.textContent = 'Copiado: '+b.dataset.e; } });
+}
+</script>

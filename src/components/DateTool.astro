@@ -1,0 +1,33 @@
+---
+const { } = Astro.props;
+---
+<div class="tool-box" id="box-DateTool">
+  <label>Fecha o timestamp UNIX
+    <input id="input" type="text" placeholder="2024-01-01T00:00:00Z o 1704067200" />
+  </label>
+  <button id="run">Convertir</button>
+  <p id="err" style="color:#f87171;margin-top:8px;"></p>
+  <div id="out" style="margin-top:12px;"></div>
+</div>
+<script>
+const box = document.currentScript?.parentElement || document.getElementById('box-DateTool');
+if (box) {
+  const input = box.querySelector('#input'); const out = box.querySelector('#out'); const btn = box.querySelector('#run'); const err = box.querySelector('#err');
+  const fmt = d => [
+    ['ISO', d.toISOString()],
+    ['Local', d.toString()],
+    ['UTC', d.toUTCString()],
+    ['UNIX (s)', Math.floor(d.getTime()/1000)],
+    ['UNIX (ms)', d.getTime()],
+  ];
+  const render = d => { out.innerHTML = '<table class="res-table">'+fmt(d).map(([k,v])=>'<tr><th>'+k+'</th><td>'+v+'</td></tr>').join('')+'</table>'; };
+  btn?.addEventListener('click', () => {
+    let d;
+    if (/^\d+$/.test(input.value.trim())) d = new Date(parseInt(input.value.length>10?input.value:input.value+'000'));
+    else d = new Date(input.value);
+    if (isNaN(d.getTime())) { err.textContent='Fecha inválida'; return; }
+    err.textContent=''; render(d);
+  });
+  render(new Date());
+}
+</script>

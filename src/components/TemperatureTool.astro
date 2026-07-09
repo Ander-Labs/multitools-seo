@@ -1,0 +1,30 @@
+---
+const { } = Astro.props;
+---
+<div class="tool-box" id="box-TemperatureTool">
+  <label>Valor
+    <input id="val" type="number" placeholder="100" />
+  </label>
+  <label>Escala origen
+    <select id="from">
+      <option value="C">Celsius</option>
+      <option value="F">Fahrenheit</option>
+      <option value="K">Kelvin</option>
+      <option value="R">Rankine</option>
+    </select>
+  </label>
+  <button id="run">Convertir</button>
+  <p id="out" style="margin-top:12px;color:#7dd3fc;"></p>
+</div>
+<script>
+const box = document.currentScript?.parentElement || document.getElementById('box-TemperatureTool');
+if (box) {
+  const val = box.querySelector('#val'); const from = box.querySelector('#from'); const out = box.querySelector('#out'); const btn = box.querySelector('#run');
+  btn?.addEventListener('click', () => {
+    const v = parseFloat(val.value); if (isNaN(v)) { out.textContent='Valor inválido'; return; }
+    const c = from.value==='C'?v: from.value==='F'?(v-32)*5/9: from.value==='K'?v-273.15:(v-491.67)*5/9;
+    const r = { C:c, F:c*9/5+32, K:c+273.15, R:(c+273.15)*9/5 };
+    out.textContent = 'C: '+r.C.toFixed(2)+'  F: '+r.F.toFixed(2)+'  K: '+r.K.toFixed(2)+'  R: '+r.R.toFixed(2);
+  });
+}
+</script>

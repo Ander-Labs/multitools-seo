@@ -1,0 +1,26 @@
+---
+const { } = Astro.props;
+---
+<div class="tool-box" id="box-ObfuscateTool">
+  <label>Cadena a ofuscar
+    <input id="input" type="text" placeholder="sk-1234567890abcdef" />
+  </label>
+  <label>Caracteres visibles en cada extremo
+    <input id="keep" type="number" value="2" min="0" max="10" />
+  </label>
+  <button id="run">Ofuscar</button>
+  <label style="margin-top:12px; display:block;">Resultado
+    <textarea id="output" rows="2" readonly></textarea>
+  </label>
+</div>
+<script>
+const box = document.currentScript?.parentElement || document.getElementById('box-ObfuscateTool');
+if (box) {
+  const input = box.querySelector('#input'); const output = box.querySelector('#output'); const btn = box.querySelector('#run'); const keep = box.querySelector('#keep');
+  btn?.addEventListener('click', () => {
+    const v = input.value; const k = Math.max(0, parseInt(keep.value) || 2);
+    if (v.length <= k*2) { output.value = '*'.repeat(v.length); return; }
+    output.value = v.slice(0,k) + '*'.repeat(v.length - k*2) + v.slice(-k);
+  });
+}
+</script>

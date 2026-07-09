@@ -1,0 +1,28 @@
+---
+const { } = Astro.props;
+---
+<div class="tool-box" id="box-TextDiffTool">
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+    <label>Texto A
+      <textarea id="a" rows="8" placeholder="primera versión..."></textarea>
+    </label>
+    <label>Texto B
+      <textarea id="b" rows="8" placeholder="segunda versión..."></textarea>
+    </label>
+  </div>
+  <div id="out" style="margin-top:12px;overflow:auto;"></div>
+</div>
+<script>
+const box = document.currentScript?.parentElement || document.getElementById('box-TextDiffTool');
+if (box) {
+  const a = box.querySelector('#a'); const b = box.querySelector('#b'); const out = box.querySelector('#out');
+  const upd = () => {
+    const la = a.value.split('\n'); const lb = b.value.split('\n');
+    const max = Math.max(la.length, lb.length);
+    let html = '<table class="res-table"><tr><th>A</th><th>B</th></tr>';
+    for (let i=0;i<max;i++){ const va=la[i]||''; const vb=lb[i]||''; const cls = va===vb?'':' style="background:rgba(127,211,252,0.12)"'; html += '<tr'+cls+'><td>'+va.replace(/</g,'&lt;')+'</td><td>'+vb.replace(/</g,'&lt;')+'</td></tr>'; }
+    out.innerHTML = html + '</table>';
+  };
+  a?.addEventListener('input', upd); b?.addEventListener('input', upd); upd();
+}
+</script>

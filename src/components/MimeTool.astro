@@ -1,0 +1,23 @@
+---
+const { } = Astro.props;
+---
+<div class="tool-box" id="box-MimeTool">
+  <label>Tipo MIME o extensión
+    <input id="input" type="text" placeholder="image/png o .png" />
+  </label>
+  <button id="run">Buscar</button>
+  <p id="out" style="margin-top:12px;color:#7dd3fc;"></p>
+</div>
+<script>
+const box = document.currentScript?.parentElement || document.getElementById('box-MimeTool');
+if (box) {
+  const map = { 'text/html':['html','htm'],'text/css':['css'],'text/plain':['txt'],'text/json':['json'],'application/json':['json'],'application/xml':['xml'],'image/png':['png'],'image/jpeg':['jpg','jpeg'],'image/gif':['gif'],'image/svg+xml':['svg'],'image/webp':['webp'],'application/pdf':['pdf'],'application/javascript':['js'],'application/zip':['zip'],'audio/mpeg':['mp3'],'video/mp4':['mp4'],'application/octet-stream':['bin'] };
+  const input = box.querySelector('#input'); const out = box.querySelector('#out'); const btn = box.querySelector('#run');
+  btn?.addEventListener('click', () => {
+    const q = input.value.trim().toLowerCase();
+    if (map[q]) return out.textContent = 'Ext: ' + map[q].join(', ');
+    const found = Object.entries(map).filter(([,e]) => e.includes(q.replace('.','')));
+    out.textContent = found.length ? 'MIME: ' + found.map(f=>f[0]).join(', ') : 'No encontrado';
+  });
+}
+</script>

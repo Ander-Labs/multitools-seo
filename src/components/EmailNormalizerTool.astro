@@ -1,0 +1,26 @@
+---
+const { } = Astro.props;
+---
+<div class="tool-box" id="box-EmailNormalizerTool">
+  <label>Email
+    <input id="input" type="text" placeholder="John.Doe+spam@gmail.com" />
+  </label>
+  <button id="run">Normalizar</button>
+  <label style="margin-top:12px; display:block;">Resultado
+    <textarea id="out" rows="2" readonly></textarea>
+  </label>
+</div>
+<script>
+const box = document.currentScript?.parentElement || document.getElementById('box-EmailNormalizerTool');
+if (box) {
+  const input = box.querySelector('#input'); const out = box.querySelector('#out'); const btn = box.querySelector('#run');
+  const norm = e => {
+    let [u,d] = e.trim().toLowerCase().split('@');
+    if (!d) return e;
+    if (d==='gmail.com'||d==='googlemail.com') u = u.split('+')[0].replace(/\./g,'');
+    else u = u.split('+')[0];
+    return u + '@' + d;
+  };
+  btn?.addEventListener('click', () => { out.value = norm(input.value); });
+}
+</script>

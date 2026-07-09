@@ -1,0 +1,24 @@
+---
+const { } = Astro.props;
+---
+<div class="tool-box" id="box-ChronometerTool">
+  <p id="disp" style="font-size:42px;font-family:monospace;text-align:center;margin:12px 0;color:#7dd3fc;">00:00.00</p>
+  <div style="display:flex;gap:12px;justify-content:center;">
+    <button id="start">Iniciar</button>
+    <button id="reset">Reiniciar</button>
+  </div>
+</div>
+<script>
+const box = document.currentScript?.parentElement || document.getElementById('box-ChronometerTool');
+if (box) {
+  const disp = box.querySelector('#disp'); const start = box.querySelector('#start'); const reset = box.querySelector('#reset');
+  let t0=null, acc=0, intv=null;
+  const fmt = ms => { const s=Math.floor(ms/1000); return String(Math.floor(s/60)).padStart(2,'0')+':'+String(s%60).padStart(2,'0')+'.'+String(Math.floor((ms%1000)/10)).padStart(2,'0'); };
+  start?.addEventListener('click', () => {
+    if (intv) { clearInterval(intv); intv=null; acc += Date.now()-t0; start.textContent='Iniciar'; return; }
+    t0 = Date.now(); start.textContent='Pausar';
+    intv = setInterval(() => { disp.textContent = fmt(acc + Date.now()-t0); }, 30);
+  });
+  reset?.addEventListener('click', () => { if(intv){clearInterval(intv);intv=null;} acc=0; t0=null; disp.textContent='00:00.00'; start.textContent='Iniciar'; });
+}
+</script>

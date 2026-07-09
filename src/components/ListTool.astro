@@ -1,0 +1,38 @@
+---
+const { } = Astro.props;
+---
+<div class="tool-box" id="box-ListTool">
+  <label>Lista (una por línea)
+    <textarea id="input" rows="6" placeholder="uno&#10;dos&#10;tres"></textarea>
+  </label>
+  <label>Prefijo
+    <input id="pre" type="text" placeholder="- " />
+  </label>
+  <label>Sufijo
+    <input id="suf" type="text" placeholder="" />
+  </label>
+  <div style="display:flex;gap:16px;flex-wrap:wrap;margin:8px 0;">
+    <label><input id="upper" type="checkbox" /> Mayúsculas</label>
+    <label><input id="sort" type="checkbox" /> Ordenar</label>
+    <label><input id="rev" type="checkbox" /> Revertir</label>
+  </div>
+  <button id="run">Procesar</button>
+  <label style="margin-top:12px; display:block;">Resultado
+    <textarea id="output" rows="6" readonly></textarea>
+  </label>
+</div>
+<script>
+const box = document.currentScript?.parentElement || document.getElementById('box-ListTool');
+if (box) {
+  const input = box.querySelector('#input'); const output = box.querySelector('#output'); const btn = box.querySelector('#run');
+  const pre = box.querySelector('#pre'); const suf = box.querySelector('#suf');
+  const upper = box.querySelector('#upper'); const sort = box.querySelector('#sort'); const rev = box.querySelector('#rev');
+  btn?.addEventListener('click', () => {
+    let rows = input.value.split('\n').map(r => r.trim()).filter(r => r);
+    if (upper.checked) rows = rows.map(r => r.toUpperCase());
+    if (sort.checked) rows = rows.slice().sort();
+    if (rev.checked) rows = rows.reverse();
+    output.value = rows.map(r => pre.value + r + suf.value).join('\n');
+  });
+}
+</script>
