@@ -1,7 +1,7 @@
 ---
 const { } = Astro.props;
 ---
-<div class="tool-box">
+<div class="tool-box" id="box-UserAgentTool">
   <label>User-Agent string
     <textarea id="ua" rows="2" placeholder="Mozilla/5.0 ..."></textarea>
   </label>
@@ -9,7 +9,7 @@ const { } = Astro.props;
   <p id="out" style="margin-top:12px;color:#9aa3b2;white-space:pre-wrap;"></p>
 </div>
 <script>
-  const box = document.currentScript?.parentElement;
+  const box = document.currentScript?.parentElement || document.getElementById('box-UserAgentTool');
   if (box) {
     const ua = box.querySelector('#ua') as HTMLTextAreaElement;
     const out = box.querySelector('#out') as HTMLParagraphElement;

@@ -1,7 +1,7 @@
 ---
 const { } = Astro.props;
 ---
-<div class="tool-box">
+<div class="tool-box" id="box-CaseTool">
   <label>Texto
     <textarea id="input" rows="4" placeholder="Escribe texto..."></textarea>
   </label>
@@ -14,7 +14,7 @@ const { } = Astro.props;
 </div>
 
 <script>
-  const box = document.currentScript?.parentElement;
+  const box = document.currentScript?.parentElement || document.getElementById('box-CaseTool');
   if (box) {
     const input = box.querySelector('#input') as HTMLTextAreaElement;
     const output = box.querySelector('#output') as HTMLTextAreaElement;

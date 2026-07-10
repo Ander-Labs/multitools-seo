@@ -1,7 +1,7 @@
 ---
 const { } = Astro.props;
 ---
-<div class="tool-box">
+<div class="tool-box" id="box-JsonTool">
   <label>JSON a formatear
     <textarea id="input" rows="8" placeholder="Pega tu JSON..."></textarea>
   </label>
@@ -12,7 +12,7 @@ const { } = Astro.props;
 </div>
 
 <script>
-  const box = document.currentScript?.parentElement;
+  const box = document.currentScript?.parentElement || document.getElementById('box-JsonTool');
   if (box) {
     const input = box.querySelector('#input') as HTMLTextAreaElement;
     const output = box.querySelector('#output') as HTMLTextAreaElement;

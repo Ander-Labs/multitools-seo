@@ -1,7 +1,7 @@
 ---
 const { } = Astro.props;
 ---
-<div class="tool-box">
+<div class="tool-box" id="box-ColorTool">
   <label>Color HEX o RGB
     <input id="input" type="text" placeholder="#7dd3fc o rgb(125,211,252)" />
   </label>
@@ -10,7 +10,7 @@ const { } = Astro.props;
 </div>
 
 <script>
-  const box = document.currentScript?.parentElement;
+  const box = document.currentScript?.parentElement || document.getElementById('box-ColorTool');
   if (box) {
     const input = box.querySelector('#input') as HTMLInputElement;
     const out = box.querySelector('#output') as HTMLParagraphElement;

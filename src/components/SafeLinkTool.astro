@@ -1,7 +1,7 @@
 ---
 const { } = Astro.props;
 ---
-<div class="tool-box">
+<div class="tool-box" id="box-SafeLinkTool">
   <label>URL con parámetros de tracking (ej: https://x.com/...?utm_...&s=..)
     <textarea id="url" rows="2" placeholder="https://..."></textarea>
   </label>
@@ -11,7 +11,7 @@ const { } = Astro.props;
   </label>
 </div>
 <script>
-  const box = document.currentScript?.parentElement;
+  const box = document.currentScript?.parentElement || document.getElementById('box-SafeLinkTool');
   if (box) {
     const url = box.querySelector('#url') as HTMLTextAreaElement;
     const out = box.querySelector('#out') as HTMLTextAreaElement;

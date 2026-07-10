@@ -1,7 +1,7 @@
 ---
 const { mode } = Astro.props;
 ---
-<div class="tool-box">
+<div class="tool-box" id="box-Base64Tool">
   <label>
     {mode === 'encode' ? 'Texto a codificar' : 'Base64 a decodificar'}
     <textarea id="input" rows="6" placeholder={mode === 'encode' ? 'Escribe tu texto...' : 'Pega tu Base64...'}></textarea>
@@ -14,7 +14,7 @@ const { mode } = Astro.props;
 </div>
 
 <script>
-  const box = document.currentScript?.parentElement;
+  const box = document.currentScript?.parentElement || document.getElementById('box-Base64Tool');
   if (box) {
     const input = box.querySelector('#input') as HTMLTextAreaElement;
     const output = box.querySelector('#output') as HTMLTextAreaElement;

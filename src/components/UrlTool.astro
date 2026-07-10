@@ -1,7 +1,7 @@
 ---
 const { } = Astro.props;
 ---
-<div class="tool-box">
+<div class="tool-box" id="box-UrlTool">
   <label>Texto / URL
     <textarea id="input" rows="4" placeholder="Pega texto o URL..."></textarea>
   </label>
@@ -13,7 +13,7 @@ const { } = Astro.props;
 </div>
 
 <script>
-  const box = document.currentScript?.parentElement;
+  const box = document.currentScript?.parentElement || document.getElementById('box-UrlTool');
   if (box) {
     const input = box.querySelector('#input') as HTMLTextAreaElement;
     const output = box.querySelector('#output') as HTMLTextAreaElement;

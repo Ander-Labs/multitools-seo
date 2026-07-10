@@ -1,14 +1,14 @@
 ---
 const { } = Astro.props;
 ---
-<div class="tool-box">
+<div class="tool-box" id="box-Bip39Tool">
   <button id="gen">Generar frase BIP39 (12 words)</button>
   <label style="margin-top:12px; display:block;">Mnemonic
     <textarea id="out" rows="3" readonly></textarea>
   </label>
 </div>
 <script>
-  const box = document.currentScript?.parentElement;
+  const box = document.currentScript?.parentElement || document.getElementById('box-Bip39Tool');
   if (box) {
     const out = box.querySelector('#out') as HTMLTextAreaElement;
     const W = 'abandon ability able about above absorb abstract abuse access accident';

@@ -1,7 +1,7 @@
 ---
 const { } = Astro.props;
 ---
-<div class="tool-box">
+<div class="tool-box" id="box-BcryptTool">
   <label>Contraseña a evaluar
     <input id="pw" type="text" placeholder="tu contraseña" />
   </label>
@@ -9,7 +9,7 @@ const { } = Astro.props;
   <p id="out" style="margin-top:12px;color:#9aa3b2;"></p>
 </div>
 <script>
-  const box = document.currentScript?.parentElement;
+  const box = document.currentScript?.parentElement || document.getElementById('box-BcryptTool');
   if (box) {
     const pw = box.querySelector('#pw') as HTMLInputElement;
     const out = box.querySelector('#out') as HTMLParagraphElement;

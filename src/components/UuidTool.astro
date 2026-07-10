@@ -1,7 +1,7 @@
 ---
 const { } = Astro.props;
 ---
-<div class="tool-box">
+<div class="tool-box" id="box-UuidTool">
   <button id="gen">Generar UUID v4</button>
   <label style="margin-top:12px; display:block;">Resultado
     <textarea id="output" rows="2" readonly></textarea>
@@ -9,7 +9,7 @@ const { } = Astro.props;
 </div>
 
 <script>
-  const box = document.currentScript?.parentElement;
+  const box = document.currentScript?.parentElement || document.getElementById('box-UuidTool');
   if (box) {
     const output = box.querySelector('#output') as HTMLTextAreaElement;
     box.querySelector('#gen')?.addEventListener('click', () => {

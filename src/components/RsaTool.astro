@@ -1,7 +1,7 @@
 ---
 const { } = Astro.props;
 ---
-<div class="tool-box">
+<div class="tool-box" id="box-RsaTool">
   <button id="gen">Generar par de claves RSA (2048)</button>
   <label style="margin-top:12px; display:block;">Clave pública
     <textarea id="pub" rows="4" readonly></textarea>
@@ -11,7 +11,7 @@ const { } = Astro.props;
   </label>
 </div>
 <script>
-  const box = document.currentScript?.parentElement;
+  const box = document.currentScript?.parentElement || document.getElementById('box-RsaTool');
   if (box) {
     const pub = box.querySelector('#pub') as HTMLTextAreaElement;
     const priv = box.querySelector('#priv') as HTMLTextAreaElement;

@@ -1,7 +1,7 @@
 ---
 const { } = Astro.props;
 ---
-<div class="tool-box">
+<div class="tool-box" id="box-MetaTagTool">
   <label>Título de la página
     <input id="title" type="text" placeholder="Mi Página" />
   </label>
@@ -17,7 +17,7 @@ const { } = Astro.props;
   </label>
 </div>
 <script>
-  const box = document.currentScript?.parentElement;
+  const box = document.currentScript?.parentElement || document.getElementById('box-MetaTagTool');
   if (box) {
     const g = (id) => box.querySelector('#'+id) as HTMLInputElement;
     const out = box.querySelector('#out') as HTMLTextAreaElement;
