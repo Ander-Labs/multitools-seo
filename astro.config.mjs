@@ -5,7 +5,7 @@ import tailwindcss from '@tailwindcss/vite';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://multitools.ander-labs.com',
+  site: 'http://localhost:4321',
   i18n: {
     defaultLocale: 'es',
     locales: ['es', 'en'],
