@@ -195,6 +195,40 @@ const langLabel = { es: 'ES', en: 'EN' } as const;
           }
         });
       })();
+
+      // Live client-side search: filter the sidebar as you type.
+      (function () {
+        function normalize(s) {
+          return (s || '').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '');
+        }
+        var gs = document.getElementById('globalSearch');
+        var ds = document.getElementById('drawerSearch');
+        var nav = document.getElementById('desktopNav');
+        if (!nav) return;
+        var links = Array.prototype.slice.call(nav.querySelectorAll('a[data-search]'));
+        var groups = Array.prototype.slice.call(nav.querySelectorAll('.cat-group'));
+
+        function apply(q) {
+          q = normalize(q).trim();
+          links.forEach(function (a) {
+            var hit = q === '' || normalize(a.getAttribute('data-search')).indexOf(q) !== -1;
+            a.style.display = hit ? '' : 'none';
+          });
+          groups.forEach(function (g) {
+            var any = Array.prototype.some.call(
+              g.querySelectorAll('a[data-search]'),
+              function (a) { return a.style.display !== 'none'; }
+            );
+            g.style.display = any ? '' : 'none';
+          });
+          // sync the other input
+          if (gs && ds && document.activeElement !== gs) gs.value = q;
+          if (gs && ds && document.activeElement !== ds) ds.value = q;
+        }
+
+        if (gs) gs.addEventListener('input', function () { apply(gs.value); });
+        if (ds) ds.addEventListener('input', function () { apply(ds.value); });
+      })();
     </script>
   </body>
 </html>
