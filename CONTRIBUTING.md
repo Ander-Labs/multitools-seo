@@ -44,7 +44,7 @@ Gracias por tu interés en aportar. Este proyecto es un sitio estático Astro (S
 ## Estado y procedencia
 
 - Reimplementación *clean-room* de [it-tools](https://github.com/CorentinTh/it-tools). No es fork; se reescribió para evitar GPL-3.0 y permitir monetización.
-- Licencia: **AGPL-3.0** (ver `LICENSE`).
+- Licencia: **propietaria / cerrada (All rights reserved)** — ver `LICENSE`.
 
 ## Entorno
 

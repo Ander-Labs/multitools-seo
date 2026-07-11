@@ -65,6 +65,6 @@ Plataforma SaaS de micro-herramientas optimizada para **SEO programático masivo
 
 ## Licencia
 
-**GNU Affero General Public License v3.0 (AGPL-3.0)** — ver [`LICENSE`](./LICENSE).
+**Propietaria / cerrada (All rights reserved)** — ver [`LICENSE`](./LICENSE).
 
-Reimplementación *clean-room* de [it-tools](https://github.com/CorentinTh/it-tools): se reescribió la funcionalidad sin reutilizar su código fuente, para evitar el conflicto de licencia GPL-3.0. Al ser AGPL-3.0, cualquier despliegue modificado de este software debe liberar también su código fuente.
+Reimplementación *clean-room* de [it-tools](https://github.com/CorentinTh/it-tools): se reescribió la funcionalidad sin reutilizar su código fuente, para evitar el conflicto de licencia GPL-3.0 y permitir monetización cerrada. El código fuente se publica solo para referencia; no otorga licencia de uso, modificación ni redistribución.
