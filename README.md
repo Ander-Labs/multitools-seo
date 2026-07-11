@@ -19,9 +19,10 @@ Plataforma SaaS de micro-herramientas optimizada para **SEO programático masivo
 |------|--------|
 | Scaffold Astro + repo | ✅ |
 | 85 herramientas client-side | ✅ |
-| Bilingüe ES/EN + hreflang | 🔄 en curso |
-| Sidebar de categorías | 🔄 en curso |
-| Sitemap automático | 🔄 en curso |
+| Bilingüe ES/EN + hreflang | ✅ |
+| Sidebar de categorías (acordeón) | ✅ |
+| Sitemap automático + hreflang en sitemap | ✅ |
+| SEO on-page (canonical, OG/Twitter, robots.txt) | ✅ |
 | Deploy Vercel | ⏳ pendiente |
 | Contenedor AdSense diferido 2s (RF-004) | ⏳ pendiente |
 
@@ -54,11 +55,16 @@ Plataforma SaaS de micro-herramientas optimizada para **SEO programático masivo
 
 ## Cómo añadir una herramienta
 
-1. Crea `src/components/MiTool.astro` con la UI en `<div class="tool-box">` y la lógica en un `<script>` usando `document.currentScript?.parentElement` como scope.
-2. Crea `src/content/tools/mi-slug.json` con los 6 campos del schema + `categoria`.
+1. Crea `src/components/MiTool.astro` con la UI en `<div id="box-MiTool" class="tool-box">` y la lógica en un `<script>` usando `document.getElementById('box-MiTool')` (o `currentScript?.parentElement` como fallback) como scope. **No uses solo `currentScript?.parentElement`: en Astro v7 los scripts son `type="module"` y `currentScript` es `null`, lo que rompe el JS en silencio.**
+2. Crea `src/content/tools/mi-slug.json` (ES) y su par EN con los campos del schema + `categoria`.
 3. Añade el import y la entrada en `componentMap` dentro de `src/pages/[locale]/[slug].astro`.
-4. `npm run build` → la página se genera sola en `/es/mi-slug` y `/en/mi-slug`.
+4. Enlaza la tool en `Sidebar.astro` con `data-search="nombre en español"` para que aparezca en la búsqueda.
+5. `npm run build` → la página se genera sola en `/es/mi-slug` y `/en/mi-slug`.
+
+> Flujo completo para contribuyentes externos en `CONTRIBUTING.md`.
 
 ## Licencia
 
-Código propio bajo la licencia que defina el proyecto (monetización permitida). Basado funcionalmente en it-tools pero reimplementado sin reutilizar su código fuente.
+**GNU Affero General Public License v3.0 (AGPL-3.0)** — ver [`LICENSE`](./LICENSE).
+
+Reimplementación *clean-room* de [it-tools](https://github.com/CorentinTh/it-tools): se reescribió la funcionalidad sin reutilizar su código fuente, para evitar el conflicto de licencia GPL-3.0. Al ser AGPL-3.0, cualquier despliegue modificado de este software debe liberar también su código fuente.
