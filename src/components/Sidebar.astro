@@ -40,23 +40,35 @@ const toolHref = (slug: string) => `/${locale}/${slug}`;
         <span class="w-1 h-1 rounded-full bg-accent-500"></span>
         {locale === 'en' ? 'All tools' : 'Todas las herramientas'}
       </a>
-      {categories.map(([cat, items]) => (
-        <div class="mb-2 cat-group">
-          <div class={`flex items-center gap-2 px-3 py-1.5 text-[10px] font-bold uppercase tracking-widest ${activeCategory === cat ? 'text-accent-400' : 'text-zinc-600'}`}>
-            <span class="w-1.5 h-1.5 rounded-full bg-current opacity-60"></span>
-            {cat}
-          </div>
-          <div class="space-y-0.5 mt-1">
-            {items.map((tool) => (
-              <a
-                href={toolHref(tool.slug)}
-                data-search={(tool.h1 + ' ' + cat + ' ' + tool.slug).toLowerCase()}
-                class={`nav-item flex items-center gap-2.5 px-3 py-1.5 rounded-md text-[13px] ${currentSlug === tool.slug ? 'active text-accent-300' : 'text-zinc-400'}`}
-              >
-                <span class="w-1 h-1 rounded-full bg-zinc-700"></span>
-                {tool.h1}
-              </a>
-            ))}
+      {categories.map(([cat, items], i) => (
+        <div class="category-group cat-group">
+          <button
+            type="button"
+            class="category-header"
+            onclick="toggleCategory(this)"
+            aria-expanded={activeCategory === cat || i === 0 ? 'true' : 'false'}
+          >
+            <div class="flex items-center gap-2">
+              <span class={`w-1.5 h-1.5 rounded-full ${activeCategory === cat ? 'bg-accent-400' : 'bg-zinc-600'}`}></span>
+              <span class={`text-xs font-bold uppercase tracking-wider ${activeCategory === cat ? 'text-accent-400' : 'text-zinc-500'}`}>{cat}</span>
+            </div>
+            <svg class={`w-3.5 h-3.5 text-zinc-600 category-chevron ${activeCategory === cat || i === 0 ? 'rotated' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+            </svg>
+          </button>
+          <div class={`category-content mt-1 ml-2 ${activeCategory === cat || i === 0 ? 'open' : ''}`}>
+            <div class="space-y-0.5 pl-2 border-l border-zinc-800">
+              {items.map((tool) => (
+                <a
+                  href={toolHref(tool.slug)}
+                  data-search={(tool.h1 + ' ' + cat + ' ' + tool.slug).toLowerCase()}
+                  class={`nav-item flex items-center gap-2.5 px-3 py-1.5 rounded-md text-[13px] ${currentSlug === tool.slug ? 'active text-accent-300' : 'text-zinc-400'}`}
+                >
+                  <span class="w-1 h-1 rounded-full bg-zinc-700"></span>
+                  {tool.h1}
+                </a>
+              ))}
+            </div>
           </div>
         </div>
       ))}
@@ -83,7 +95,7 @@ const toolHref = (slug: string) => `/${locale}/${slug}`;
       clone.querySelectorAll('a[href]').forEach(function (a) {
         a.addEventListener('click', function () {
           var drawer = document.getElementById('mobileDrawer');
-          if (drawer) { drawer.classList.add('hidden'); document.body.style.overflow = ''; }
+          if (drawer) { drawer.classList.remove('active'); document.body.style.overflow = ''; }
         });
       });
     }

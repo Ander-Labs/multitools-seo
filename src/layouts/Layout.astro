@@ -110,8 +110,8 @@ const langLabel = { es: 'ES', en: 'EN' } as const;
     </header>
 
     <!-- ============ MOBILE DRAWER ============ -->
-    <div id="mobileDrawer" class="fixed inset-0 z-[60] bg-black/60 backdrop-blur-sm lg:hidden hidden">
-      <div class="absolute right-0 top-0 bottom-0 w-[85%] max-w-sm bg-surface-1 border-l border-zinc-800 flex flex-col">
+    <div id="mobileDrawer" class="drawer-overlay fixed inset-0 z-[60] bg-black/60 backdrop-blur-sm lg:hidden">
+      <div class="drawer-panel absolute right-0 top-0 bottom-0 w-[85%] max-w-sm bg-surface-1 border-l border-zinc-800 flex flex-col">
         <div class="flex items-center justify-between p-4 border-b border-zinc-800">
           <span class="font-semibold text-white">{locale === 'en' ? 'Navigation' : 'Navegación'}</span>
           <button id="closeDrawer" class="p-2 rounded-lg hover:bg-surface-3">
@@ -168,14 +168,30 @@ const langLabel = { es: 'ES', en: 'EN' } as const;
         });
       })();
 
-      // Mobile drawer
+      // Category accordion toggle (used by onclick in sidebar)
+      window.toggleCategory = function (btn) {
+        var content = btn.nextElementSibling;
+        var chevron = btn.querySelector('.category-chevron');
+        var isOpen = content.classList.contains('open');
+        if (isOpen) {
+          content.classList.remove('open');
+          chevron.classList.remove('rotated');
+          btn.setAttribute('aria-expanded', 'false');
+        } else {
+          content.classList.add('open');
+          chevron.classList.add('rotated');
+          btn.setAttribute('aria-expanded', 'true');
+        }
+      };
+
+      // Mobile drawer (slide-in via .active class)
       (function () {
         var openBtn = document.getElementById('mobileMenuBtn');
         var drawer = document.getElementById('mobileDrawer');
         var closeBtn = document.getElementById('closeDrawer');
         if (!openBtn || !drawer) return;
-        function open() { drawer.classList.remove('hidden'); document.body.style.overflow = 'hidden'; }
-        function close() { drawer.classList.add('hidden'); document.body.style.overflow = ''; }
+        function open() { drawer.classList.add('active'); document.body.style.overflow = 'hidden'; }
+        function close() { drawer.classList.remove('active'); document.body.style.overflow = ''; }
         openBtn.addEventListener('click', open);
         if (closeBtn) closeBtn.addEventListener('click', close);
         drawer.addEventListener('click', function (e) { if (e.target === drawer) close(); });
@@ -220,6 +236,9 @@ const langLabel = { es: 'ES', en: 'EN' } as const;
               function (a) { return a.style.display !== 'none'; }
             );
             g.style.display = any ? '' : 'none';
+            // When searching, force the category open so hits are visible.
+            var content = g.querySelector('.category-content');
+            if (content) content.classList.toggle('open', q !== '' ? any : (g.querySelector('.category-chevron.rotated') !== null));
           });
           // sync the other input
           if (gs && ds && document.activeElement !== gs) gs.value = q;
