@@ -63,7 +63,9 @@ Plataforma SaaS de micro-herramientas optimizada para **SEO programático masivo
 
 > Flujo completo para contribuyentes externos en `CONTRIBUTING.md`.
 
-## Licencia
+## Documentación
+
+La documentación completa del proyecto (estado, arquitectura, checklists SEO/AdSense/GSC, mantenimiento) está en [`docs/WIKI.md`](./docs/WIKI.md).
 
 **Propietaria / cerrada (All rights reserved)** — ver [`LICENSE`](./LICENSE).
 
