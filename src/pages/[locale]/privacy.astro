@@ -1,0 +1,64 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+export async function getStaticPaths() {
+  return [
+    {
+      params: { locale: 'es' },
+      props: {
+        locale: 'es' as const,
+        titulo_seo: 'Política de Privacidad — MultiTools',
+        meta_descripcion: 'Política de privacidad de MultiTools: herramientas 100% en tu navegador, sin envío de datos a servidores y uso de Google AdSense.',
+      },
+    },
+    {
+      params: { locale: 'en' },
+      props: {
+        locale: 'en' as const,
+        titulo_seo: 'Privacy Policy — MultiTools',
+        meta_descripcion: 'MultiTools privacy policy: 100% in-browser tools, no server uploads, and use of Google AdSense.',
+      },
+    },
+  ];
+}
+
+const { locale } = Astro.props;
+const es = locale === 'es';
+---
+
+<Layout titulo_seo={Astro.props.titulo_seo} meta_descripcion={Astro.props.meta_descripcion} locale={locale}>
+  <main class="max-w-3xl mx-auto px-4 lg:px-8 py-10 lg:py-14">
+    <h1 class="text-2xl lg:text-3xl font-bold text-white tracking-tight mb-6">
+      {es ? 'Política de Privacidad' : 'Privacy Policy'}
+    </h1>
+
+    <div class="prose-section space-y-5 text-sm leading-[1.8] text-zinc-300">
+      <p>{es
+        ? 'Última actualización: 11 de julio de 2026. Esta política explica cómo MultiTools maneja tu información.'
+        : 'Last updated: July 11, 2026. This policy explains how MultiTools handles your information.'}</p>
+
+      <h2 class="text-lg font-semibold text-white mt-8 mb-2">{es ? 'Herramientas en tu navegador' : 'In-browser tools'}</h2>
+      <p>{es
+        ? 'Todas las herramientas de MultiTools se ejecutan íntegramente en tu navegador (client-side). El texto, archivos o datos que ingreses no se envían a ningún servidor ni se almacenan por nosotros. No contamos con backend ni base de datos.'
+        : 'All MultiTools utilities run entirely in your browser (client-side). Any text, files, or data you enter are never sent to a server or stored by us. We have no backend or database.'}</p>
+
+      <h2 class="text-lg font-semibold text-white mt-8 mb-2">{es ? 'Google AdSense y cookies' : 'Google AdSense and cookies'}</h2>
+      <p>{es
+        ? 'Este sitio utiliza Google AdSense para mostrar anuncios. AdSense y sus socios pueden usar cookies y tecnologías similares para personalizar anuncios y medir su rendimiento. Puedes gestionar tus preferencias de anuncios en las Configuraciones de anuncios de Google o desactivar la personalización en la página de Configuración de anuncios de Google (https://www.google.com/settings/ads).'
+        : 'This site uses Google AdSense to display ads. AdSense and its partners may use cookies and similar technologies to personalize and measure ads. You can manage your ad preferences in Google Ads Settings or opt out of personalization at https://www.google.com/settings/ads.'}</p>
+      <p>{es
+        ? 'Las cookies de publicidad se activan únicamente tras tu consentimiento a través de nuestro banner de cookies. Puedes retirar tu consentimiento en cualquier momento.'
+        : 'Advertising cookies are enabled only after your consent via our cookie banner. You may withdraw consent at any time.'}</p>
+
+      <h2 class="text-lg font-semibold text-white mt-8 mb-2">{es ? 'Enlaces externos' : 'External links'}</h2>
+      <p>{es
+        ? 'Este sitio puede contener enlaces a sitios de terceros. No nos hacemos responsables de sus políticas de privacidad.'
+        : 'This site may contain links to third-party sites. We are not responsible for their privacy policies.'}</p>
+
+      <h2 class="text-lg font-semibold text-white mt-8 mb-2">{es ? 'Contacto' : 'Contact'}</h2>
+      <p>{es
+        ? 'Si tienes dudas sobre esta política, escríbenos a andersonruizr2@gmail.com.'
+        : 'If you have questions about this policy, email us at andersonruizr2@gmail.com.'}</p>
+    </div>
+  </main>
+</Layout>

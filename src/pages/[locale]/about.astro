@@ -1,0 +1,46 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+export async function getStaticPaths() {
+  return [
+    {
+      params: { locale: 'es' },
+      props: {
+        locale: 'es' as const,
+        titulo_seo: 'Acerca de — MultiTools',
+        meta_descripcion: 'MultiTools es una plataforma de micro-herramientas gratuitas para desarrolladores, 100% en el navegador y sin envíos a servidor.',
+      },
+    },
+    {
+      params: { locale: 'en' },
+      props: {
+        locale: 'en' as const,
+        titulo_seo: 'About — MultiTools',
+        meta_descripcion: 'MultiTools is a platform of free developer micro-tools, 100% in-browser with no server uploads.',
+      },
+    },
+  ];
+}
+
+const { locale } = Astro.props;
+const es = locale === 'es';
+---
+
+<Layout titulo_seo={Astro.props.titulo_seo} meta_descripcion={Astro.props.meta_descripcion} locale={locale}>
+  <main class="max-w-3xl mx-auto px-4 lg:px-8 py-10 lg:py-14">
+    <h1 class="text-2xl lg:text-3xl font-bold text-white tracking-tight mb-6">
+      {es ? 'Acerca de MultiTools' : 'About MultiTools'}
+    </h1>
+    <div class="prose-section space-y-5 text-sm leading-[1.8] text-zinc-300">
+      <p>{es
+        ? 'MultiTools es una colección de micro-herramientas online para desarrolladores: conversores, generadores, decodificadores y utilidades de texto, red y criptografía.'
+        : 'MultiTools is a collection of online developer micro-tools: converters, generators, decoders, and text, network, and cryptography utilities.'}</p>
+      <p>{es
+        ? 'Nuestro principio es la privacidad: todo se procesa en tu navegador. Nada se sube a un servidor, no pedimos registro y el código es cerrado (All rights reserved).'
+        : 'Our principle is privacy: everything runs in your browser. Nothing is uploaded to a server, no sign-up required, and the code is closed (All rights reserved).'}</p>
+      <p>{es
+        ? 'El sitio se mantiene con anuncios de Google AdSense. Si una herramienta te sirvió, compartirla ayuda a que sigamos creando más.'
+        : 'The site is supported by Google AdSense ads. If a tool helped you, sharing it helps us build more.'}</p>
+    </div>
+  </main>
+</Layout>

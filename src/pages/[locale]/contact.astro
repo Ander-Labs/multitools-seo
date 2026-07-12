@@ -1,0 +1,44 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+export async function getStaticPaths() {
+  return [
+    {
+      params: { locale: 'es' },
+      props: {
+        locale: 'es' as const,
+        titulo_seo: 'Contacto — MultiTools',
+        meta_descripcion: 'Contáctanos para sugerencias de herramientas, alianzas o dudas sobre MultiTools.',
+      },
+    },
+    {
+      params: { locale: 'en' },
+      props: {
+        locale: 'en' as const,
+        titulo_seo: 'Contact — MultiTools',
+        meta_descripcion: 'Contact us for tool suggestions, partnerships, or questions about MultiTools.',
+      },
+    },
+  ];
+}
+
+const { locale } = Astro.props;
+const es = locale === 'es';
+---
+
+<Layout titulo_seo={Astro.props.titulo_seo} meta_descripcion={Astro.props.meta_descripcion} locale={locale}>
+  <main class="max-w-3xl mx-auto px-4 lg:px-8 py-10 lg:py-14">
+    <h1 class="text-2xl lg:text-3xl font-bold text-white tracking-tight mb-6">
+      {es ? 'Contacto' : 'Contact'}
+    </h1>
+    <div class="prose-section space-y-5 text-sm leading-[1.8] text-zinc-300">
+      <p>{es
+        ? '¿Tienes una sugerencia de herramienta, un reporte de error o una propuesta de alianza? Escríbenos:'
+        : 'Have a tool suggestion, bug report, or partnership proposal? Email us:'}</p>
+      <p class="text-accent-400 font-medium">andersonruizr2@gmail.com</p>
+      <p>{es
+        ? 'También nos puedes encontrar en X (Twitter): @Ander_Labs.'
+        : 'You can also find us on X (Twitter): @Ander_Labs.'}</p>
+    </div>
+  </main>
+</Layout>

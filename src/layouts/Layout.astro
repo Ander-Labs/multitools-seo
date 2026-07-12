@@ -1,5 +1,6 @@
 ---
 import '../styles/global.css';
+import CookieConsent from '../components/CookieConsent.astro';
 interface Props {
   titulo_seo?: string;
   meta_descripcion?: string;
@@ -61,9 +62,6 @@ const siteName = 'MultiTools';
     <meta name="twitter:site" content="@Ander_Labs" />
     <meta name="twitter:title" content={titulo_seo} />
     <meta name="twitter:image" content={`${SITE}/og-default.png`} />
-
-    <!-- Google AdSense -->
-    <script is:inline async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2964007773702778" crossorigin="anonymous"></script>
 
     <script is:inline>
       // Apply persisted theme before paint to avoid flash.
@@ -280,5 +278,6 @@ const siteName = 'MultiTools';
         if (ds) ds.addEventListener('input', function () { apply(ds.value); });
       })();
     </script>
+    <CookieConsent />
   </body>
 </html>

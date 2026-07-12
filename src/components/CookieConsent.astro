@@ -1,0 +1,53 @@
+---
+// Cookie consent banner. Loads Google AdSense only after explicit consent.
+const ADSENSE_CLIENT = 'ca-pub-2964007773702778';
+---
+
+<div id="cookieConsent" class="fixed bottom-0 left-0 right-0 z-50 bg-surface-1/95 backdrop-blur-xl border-t border-zinc-800 px-4 py-4 lg:px-8" style="display:none;">
+  <div class="max-w-4xl mx-auto flex flex-col sm:flex-row items-start sm:items-center gap-4">
+    <p class="text-xs text-zinc-400 leading-relaxed flex-1">
+      Usamos cookies de Google AdSense para mostrar anuncios personalizados. Al aceptar, consientes el uso de cookies. Puedes rechazar y seguir usando las herramientas sin anuncios de personalización.
+      <a href="/es/politica-de-privacidad" class="text-accent-400 hover:underline ml-1">Más información</a>.
+    </p>
+    <div class="flex items-center gap-2 shrink-0">
+      <button id="cookieReject" class="px-4 py-2 rounded-lg text-xs font-medium text-zinc-300 border border-zinc-700 hover:bg-surface-4 transition-colors">Rechazar</button>
+      <button id="cookieAccept" class="px-4 py-2 rounded-lg text-xs font-semibold text-white btn-primary">Aceptar</button>
+    </div>
+  </div>
+</div>
+
+<script is:inline>
+  (function () {
+    var KEY = 'cookie-consent';
+    var banner = document.getElementById('cookieConsent');
+    if (!banner) return;
+    var stored = null;
+    try { stored = localStorage.getItem(KEY); } catch (e) {}
+    if (stored) {
+      if (stored === 'accepted') loadAds();
+      return; // already decided
+    }
+    banner.style.display = 'block';
+
+    function accept() {
+      try { localStorage.setItem(KEY, 'accepted'); } catch (e) {}
+      banner.style.display = 'none';
+      loadAds();
+    }
+    function reject() {
+      try { localStorage.setItem(KEY, 'rejected'); } catch (e) {}
+      banner.style.display = 'none';
+    }
+    function loadAds() {
+      if (window.adsbygoogle) return; // already loaded
+      var s = document.createElement('script');
+      s.async = true;
+      s.crossOrigin = 'anonymous';
+      s.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2964007773702778';
+      document.head.appendChild(s);
+    }
+
+    document.getElementById('cookieAccept').addEventListener('click', accept);
+    document.getElementById('cookieReject').addEventListener('click', reject);
+  })();
+</script>
