@@ -84,7 +84,7 @@ const siteName = 'MultiTools';
     <!-- ============ HEADER ============ -->
     <header class="fixed top-0 left-0 right-0 h-16 bg-surface-1/80 backdrop-blur-xl border-b border-zinc-800/50 z-50 flex items-center px-4 lg:px-6">
       <!-- Logo -->
-      <a href={`/${locale}/`} class="flex items-center gap-2 shrink-0">
+      <a href={`/${locale}/`} class="flex items-center gap-2 shrink-0" aria-label={locale === 'en' ? 'MultiTools home' : 'MultiTools inicio'}>
         <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-accent-500 to-accent-700 flex items-center justify-center">
           <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zm10 0a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zm10 0a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"/>
@@ -146,7 +146,7 @@ const siteName = 'MultiTools';
       <div class="drawer-panel absolute right-0 top-0 bottom-0 w-[85%] max-w-sm bg-surface-1 border-l border-zinc-800 flex flex-col">
         <div class="flex items-center justify-between p-4 border-b border-zinc-800">
           <span class="font-semibold text-white">{locale === 'en' ? 'Navigation' : 'Navegación'}</span>
-          <button id="closeDrawer" class="p-2 rounded-lg hover:bg-surface-3">
+          <button id="closeDrawer" class="p-2 rounded-lg hover:bg-surface-3" aria-label={locale === 'en' ? 'Close menu' : 'Cerrar menú'}>
             <svg class="w-5 h-5 text-zinc-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
             </svg>
@@ -185,7 +185,8 @@ const siteName = 'MultiTools';
     </div>
 
     <footer class="border-t border-zinc-800/50 py-8 px-4 lg:px-6 text-center text-xs text-zinc-600">
-      MultiTools — {locale === 'en' ? 'free, private, serverless tools. 100% processed in your browser.' : 'herramientas gratuitas, privadas y sin servidor. Procesado 100% en tu navegador.'}
+      <p class="mb-2">MultiTools — {locale === 'en' ? 'free, private, serverless tools. 100% processed in your browser.' : 'herramientas gratuitas, privadas y sin servidor. Procesado 100% en tu navegador.'}</p>
+      <a href={`/${locale}/politica-de-privacidad`} class="text-zinc-400 hover:text-accent-400 underline underline-offset-2">{locale === 'en' ? 'Privacy Policy' : 'Política de Privacidad'}</a>
     </footer>
 
     <script is:inline>
