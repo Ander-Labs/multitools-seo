@@ -66,6 +66,15 @@ const siteName = 'MultiTools';
     <!-- Google Search Console verification -->
     <meta name="google-site-verification" content="v7MEbuVnVsS8S8vDhU48aGlwXt-1RFGMpCSAlMAHcjs" />
 
+    <!-- Google Analytics (gtag.js) -->
+    <script is:inline async src="https://www.googletagmanager.com/gtag/js?id=G-FG7M9HWR2F"></script>
+    <script is:inline>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-FG7M9HWR2F');
+    </script>
+
     <script is:inline>
       // Apply persisted theme before paint to avoid flash.
       (function () {
