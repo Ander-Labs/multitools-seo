@@ -18,6 +18,10 @@ export default defineConfig({
       defaultLocale: 'es',
       locales: { es: 'es', en: 'en' },
     },
+    serialize(item) {
+      // Agrega lastmod para que GSC re-indexe más rápido
+      return { ...item, lastmod: new Date(), changefreq: 'weekly', priority: 0.7 };
+    },
   })],
   vite: {
     plugins: [tailwindcss()],
