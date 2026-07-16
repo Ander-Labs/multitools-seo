@@ -1,6 +1,5 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
-import sitemap from '@astrojs/sitemap';
 import tailwindcss from '@tailwindcss/vite';
 
 // https://astro.build/config
@@ -13,15 +12,6 @@ export default defineConfig({
       prefixDefaultLocale: true,
     },
   },
-  integrations: [sitemap({
-    i18n: {
-      defaultLocale: 'es',
-      locales: { es: 'es', en: 'en' },
-    },
-    serialize(item) {
-      return { ...item, lastmod: new Date(), changefreq: 'weekly', priority: 0.7 };
-    },
-  })],
   vite: {
     plugins: [tailwindcss()],
   },

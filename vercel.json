@@ -5,19 +5,5 @@
       "destination": "/es/",
       "permanent": true
     }
-  ],
-  "headers": [
-    {
-      "source": "/sitemap-0.xml",
-      "headers": [
-        { "key": "Content-Type", "value": "application/xml; charset=utf-8" }
-      ]
-    },
-    {
-      "source": "/sitemap-index.xml",
-      "headers": [
-        { "key": "Content-Type", "value": "application/xml; charset=utf-8" }
-      ]
-    }
   ]
 }
