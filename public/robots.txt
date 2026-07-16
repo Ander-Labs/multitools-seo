@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://multitools-seo.vercel.app/sitemap.xml
+Sitemap: https://multitools.aisagrowth.lat/sitemap.xml

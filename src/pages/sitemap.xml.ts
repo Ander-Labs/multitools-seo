@@ -1,7 +1,7 @@
 import type { APIRoute } from 'astro';
 import { getCollection } from 'astro:content';
 
-const SITE = 'https://multitools-seo.vercel.app';
+const SITE = 'https://multitools.aisagrowth.lat';
 const LOCALES = ['es', 'en'] as const;
 
 export const GET: APIRoute = async () => {

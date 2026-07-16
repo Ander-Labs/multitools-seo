@@ -4,7 +4,7 @@ import tailwindcss from '@tailwindcss/vite';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://multitools-seo.vercel.app',
+  site: 'https://multitools.aisagrowth.lat',
   i18n: {
     defaultLocale: 'es',
     locales: ['es', 'en'],
